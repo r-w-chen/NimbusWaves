@@ -3,19 +3,35 @@ import {csrfFetch} from './csrf';
 export const songsReducer = (state = {}, action) => {
 
     switch(action.type){
+        case LOAD_SONGS:
+            // return {...state, [state]: action.songs};
+            return action.songs;
         case ADD_SONG:
-            return {...state, audio: action.song}
+            return {...state, [state]: action.song}
         default:
             return state;
     }
 }
+const normalize = (arrOfObjects) => {
+    return arrOfObjects.reduce((normalized, obj) => {
+        normalized[obj.id] = obj;
+        return normalized;
+    } , {})
+}
 
-
-const ADD_SONG = "song/addSong"
+const ADD_SONG = "songs/addSong"
 const addSong = (song) => {
     return {
         type: ADD_SONG,
         song
+    }
+}
+
+const LOAD_SONGS = "songs/loadSongs"
+const loadSongs = (songs) => {
+    return {
+        type: LOAD_SONGS,
+        songs
     }
 }
 //thunk
@@ -42,4 +58,12 @@ export const uploadSong = (song) => async dispatch => {
 
     //still need to dispatch action creator 
     dispatch(addSong(data.song));
+}
+
+export const fetchSongs = () => async dispatch => {
+    const res = await csrfFetch('/api/songs')
+    const { songs } = await res.json();
+    const normalizedData = normalize(songs);
+    dispatch(loadSongs(normalizedData));
+    return normalizedData;
 }

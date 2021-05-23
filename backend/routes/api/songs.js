@@ -9,8 +9,8 @@ const router = express.Router();
 
 router.get('/', asyncHandler(async (req, res) => {
     //may want to eagerload Comments
-    const songs = await Song.findAll();
-    console.log(songs);
+    const songs = await Song.findAll({include: User});
+    res.json({songs})
 }));
 
 const songFields = [
@@ -36,7 +36,7 @@ router.post('/', multipleFieldsMulterUpload(songFields) ,asyncHandler(async (req
     // console.log("SONG URL", audioURL)
 
     // *** change to create() instead of build/save()
-    song.save(); 
+    await song.save(); 
     res.json({song});
 }));
 

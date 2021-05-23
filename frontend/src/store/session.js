@@ -6,7 +6,7 @@ export const sessionReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {
         case START_SESSION:
-            console.log("ACTION USER", action.user);
+            // console.log("ACTION USER", action.user);
             return {...state, user: action.user}
         case END_SESSION:
             return {...state, user: null }
@@ -46,7 +46,6 @@ export const login = (credential, password) => async dispatch => {
 export const restoreSession = () => async dispatch => {
     const res = await csrfFetch(`/api/session`);
     const data = await res.json();
-    console.log("USER", data);
     dispatch(startSession(data.user));
 
     return res;
