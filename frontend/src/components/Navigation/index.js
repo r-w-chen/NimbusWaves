@@ -10,7 +10,9 @@ const Navigation = () => {
     let sessionLinks;
     if(sessionUser) sessionLinks = (
         <>
+        <NavLink to="/upload">Upload</NavLink> 
         <ProfileButton user={sessionUser}/>
+        
         </>
     );
     else sessionLinks = (
@@ -19,7 +21,7 @@ const Navigation = () => {
         <NavLink to="/signup">Signup</NavLink> 
         </>
     )
-
+    // *** might want to change ul to nav element
     return (
         <ul>
             <NavLink to="/">Home</NavLink>

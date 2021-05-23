@@ -11,9 +11,6 @@
     "db:redo": "npm run db:seed:undo:all && npm run db:migrate:undo:all && npm run db:migrate && npm run db:seed:all",
     "db:seed:all": "dotenv sequelize-cli db:seed:all",
     "db:seed:undo:all": "dotenv sequelize-cli db:seed:undo:all",
-    "migration:generate": "sequelize-cli migration:generate",
-    "model:generate": "sequelize-cli model:generate",
-    "seed:generate": "sequelize-cli seed:generate",
     "start": "per-env",
     "start:development": "dotenv nodemon ./bin/www",
     "start:production": "dotenv ./bin/www"
@@ -22,6 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.912.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
@@ -35,6 +33,7 @@
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
     "per-env": "^1.0.2",
     "pg": "^8.6.0",
     "sequelize": "^5.22.4",

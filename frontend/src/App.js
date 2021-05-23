@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { restoreSession } from './store/session';
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
+import UploadFormPage from './components/UploadFormPage';
 import Navigation from "./components/Navigation";
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <SignupFormPage />
+        </Route>
+        <Route path="/upload">
+          <UploadFormPage />
         </Route>
       </Switch>
     </>

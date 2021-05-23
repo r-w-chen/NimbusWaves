@@ -4,11 +4,14 @@ const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth.j
 const { User } = require('../../db/models');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
-
+const songsRouter = require('./songs.js');
+const commentsRouter = require('./comments.js')
 
 router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
+router.use('/songs', songsRouter);
+router.use('/comments', commentsRouter);
 
 router.get('/set-token-cookie', asyncHandler(async (req, res) => {
   const user = await User.findOne({

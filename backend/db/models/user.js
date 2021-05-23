@@ -23,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
         len: [3, 256]
       },
     },
+    profileImgURL: {
+      type: DataTypes.STRING(1000),
+    },
+    coverImgURL: {
+      type: DataTypes.STRING(1000),
+    },
     hashedPassword: {
       type: DataTypes.STRING.BINARY,
       allowNull: false,
@@ -47,7 +53,11 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
   User.associate = function(models) {
-    // associations can be defined here
+    User.hasMany(models.Song, {foreignKey: 'userId'});
+    User.hasMany(models.Comment, {foreignKey: 'userId'});
+    User.hasMany(models.Follow, {foreignKey: 'followerId', as: 'follower'});
+    User.hasMany(models.Follow, {foreignKey: 'userFollowedId', as: 'userFollowed'});
+    User.hasMany(models.Like, {foreignKey: 'userId'});
   };
   //****** USER INSTANCE METHODS  *********/
   //return an obj with User instance infor that is safe to save to a JWT

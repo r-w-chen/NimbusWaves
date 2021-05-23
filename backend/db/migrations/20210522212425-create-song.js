@@ -1,46 +1,48 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Songs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING(30),
+      title: {
         allowNull: false,
-        unique: true,
+        type: Sequelize.STRING(100)
       },
-      email: {
-        type: Sequelize.STRING(256),
+      audioURL: {
         allowNull: false,
-        unique: true,
+        type: Sequelize.STRING(1000)
       },
-      profileImgURL: {
-        type: Sequelize.STRING(1000),
+      genre: {
+        type: Sequelize.STRING(30)
       },
-      coverImgURL: {
-        type: Sequelize.STRING(1000),
+      songImgURL: {
+        type: Sequelize.STRING(1000)
       },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
+      description: {
+        type: Sequelize.TEXT
+      },
+      userId: {
         allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: "Users" }
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now'),
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now'),
+        defaultValue: Sequelize.fn('NOW'),
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Songs');
   }
 };
