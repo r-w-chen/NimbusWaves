@@ -14,6 +14,7 @@
 .profile-song-img{
     width: 160px;
     height: 160px;
+    padding-bottom: 20px;
 }
 
 .play-button-container{
@@ -22,6 +23,9 @@
 }
 
 .song-title-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-left: 15px;
 }
 .play-button{
@@ -29,5 +33,6 @@
 }
 .play-button:hover{
     cursor: pointer;
+    color: rgb(148, 204, 223);
 }
 

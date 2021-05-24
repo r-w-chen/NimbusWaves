@@ -15,7 +15,7 @@ export default function UserProfilePage() {
 
     useEffect(() => {
        dispatch(fetchProfile(userId))
-       .then((data) => setProfileLoaded(true))
+       .then(() => setProfileLoaded(true))
        .then(() => dispatch(fetchProfileSongs(userId)))
       
     }, [userId])

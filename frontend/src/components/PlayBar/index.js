@@ -1,46 +1,36 @@
-import React, { useRef, useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import ReactAudioPlayer from 'react-audio-player';
 import styled from 'styled-components';
+import { useAudio } from '../../context/Audio';
 
 
 const PlayBarContainer = styled.div`
     position: fixed;
     width: 100%;
-    background-color: #00b7ff40;
+    background-color: #c1eeff;
     height: 48px;
     border-top: 1px solid #00b7ff70;
     bottom: 0px;
 `;
+const ControlDiv = styled.div`
+    padding: 15px;
+`;
 
 export default function PlayBar() {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef();
-    console.log("", audioRef.current);
-    if(audioRef.current){
-    audioRef.current.src = "https://sc-clone.s3.amazonaws.com/1621740311256.mp3"
-
-    }
-    const playAudio = () => {
-        // if(isPlaying){
-        //     audioRef.current.pause();
-        //     setIsPlaying(false);
-        // } else {
-        //     audioRef.current.play();
-        //     setIsPlaying(true);
-        // }
-        audioRef.current.play();
-    }
-    const pause = () => {
-        audioRef.current.pause();
-    }
+    const {audio, isPlaying, setIsPlaying, playOrPause} = useAudio();
+    // console.log("what is the audio?", audio)
+    useEffect(() => {
+        audio.src = "https://sc-clone.s3.amazonaws.com/1621740311256.mp3";
+    }, [])
+   
      
     return (
         <>
           <PlayBarContainer>
-            <button onClick={playAudio}>Play</button>
-            <button onClick={pause}>Pause</button>
+            <ControlDiv>
+              <i className={isPlaying ? "fas fa-pause":"fas fa-play"} onClick={playOrPause}></i>
+            </ControlDiv>
           </PlayBarContainer>
-          <audio ref={audioRef}></audio>
-          
         </>
     )
 }

@@ -5,6 +5,7 @@ import './index.css';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ModalProvider } from './context/Modal';
+import { AudioProvider } from './context/Audio';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { restoreCSRF, csrfFetch } from './store/csrf';
@@ -23,11 +24,13 @@ function Root() {
   
   return (
     <Provider store={store}>
+      <AudioProvider>
       <ModalProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
       </ModalProvider>
+      </AudioProvider>
     </Provider>
   );
 }
