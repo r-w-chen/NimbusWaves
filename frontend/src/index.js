@@ -4,6 +4,7 @@ import './index.css';
 
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { ModalProvider } from './context/Modal';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { restoreCSRF, csrfFetch } from './store/csrf';
@@ -22,9 +23,11 @@ function Root() {
   
   return (
     <Provider store={store}>
+      <ModalProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      </ModalProvider>
     </Provider>
   );
 }

@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ReactDom from 'react-dom';
 import { login } from '../../store/session';
 import './LoginForm.css';
 const LoginFormPage = () => {
@@ -46,6 +45,7 @@ const LoginFormPage = () => {
                   required
                 />
             </label>
+            <p>Don't have an account? Sign Up <Link to="/signup">here</Link></p>
             <button type="submit">Log In</button>
         </form>
     )
