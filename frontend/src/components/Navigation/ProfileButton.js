@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
+import { NavLink, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 const ProfileButton = ({user}) => {
     const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch();
-
+    const history = useHistory();
     const handleLogout = () => {
         dispatch(logout());
         setShowMenu(false);
+        history.push('/')
     }
     useEffect(() => {
         const closeMenu = () => setShowMenu(false);
@@ -28,6 +30,7 @@ const ProfileButton = ({user}) => {
        <ul className="profile-dropdown">
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <NavLink to={`/${user.id}`}>Profile</NavLink>
             <li>
                 <button onClick={handleLogout}>Logout</button>
             </li>

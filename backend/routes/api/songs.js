@@ -13,6 +13,16 @@ router.get('/', asyncHandler(async (req, res) => {
     res.json({songs})
 }));
 
+router.get('/user/:userId', asyncHandler(async (req, res) => {
+    const {userId} = req.params;
+    const userSongs = await Song.findAll({
+        where: { userId },
+    })
+    console.log(userSongs);
+    res.json({userSongs})
+}))
+
+
 const songFields = [
     {name: 'audioImg'},
     {name: 'audioFile'}

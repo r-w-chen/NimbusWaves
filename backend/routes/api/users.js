@@ -43,14 +43,12 @@ router.post(
     }),
   );
 
-router.get('/:username', asyncHandler(async (req, res) => {
-  const {username} = req.params;
+router.get('/:userId', asyncHandler(async (req, res) => {
+  const {userId} = req.params;
+  // console.log("GOT USER ID", userId)
+  const user = await User.findByPk(userId)
 
-  const user = await User.findOne({
-    where: {username : username}
-  });
-
-  console.log(user)
+  // console.log(user)
   res.json(user);
 }));
 

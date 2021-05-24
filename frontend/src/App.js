@@ -35,10 +35,10 @@ function App() {
         <Route path="/upload">
           <UploadFormPage />
         </Route>
-        <Route path="/:user">
+        <Route path="/:userId">
           <UserProfilePage />
         </Route>
-        <Route path="/:username/:songId">
+        <Route path="/:userId/:songId">
           {/* render individual song page */}
           <SingleSongPage />
         </Route>

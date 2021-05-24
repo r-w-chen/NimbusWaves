@@ -1,4 +1,33 @@
+.song-container{
+    display: flex;
+    margin: 20px;
+}
 .profile-navlink{
     font-size: 18px;
     margin: 15px 10px 0px 10px;
+    padding: 5px;
 }
+.profile-navlink:hover{
+    border-bottom: 1px solid black;
+}
+
+.profile-song-img{
+    width: 160px;
+    height: 160px;
+}
+
+.play-button-container{
+    display: flex;
+    margin-left: 15px;
+}
+
+.song-title-container{
+    margin-left: 15px;
+}
+.play-button{
+    color: lightblue;
+}
+.play-button:hover{
+    cursor: pointer;
+}
+
