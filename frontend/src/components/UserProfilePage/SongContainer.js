@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {useAudio} from '../../context/Audio';
 import { Btn, SongImg, DefaultSongImg } from '../styled-components/index';
 import UploadFormModal from '../UploadFormPage/UploadFormModal';
@@ -32,7 +33,7 @@ export default function SongContainer({song, user}) {
                 <div className="song-title-container">
                     <div>
                         <h2>{user.username}</h2>
-                        <h1>{song.title}</h1>
+                        <Link to={`/${user.id}/${song.id}`}>{song.title}</Link>
                     </div>
                     <div>
                         <UploadFormModal type="update" songId={song.id}></UploadFormModal>

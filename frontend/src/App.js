@@ -37,7 +37,7 @@ function App() {
         <Route path="/upload">
           <UploadFormPage />
         </Route>
-        <Route path="/:userId">
+        <Route exact path="/:userId">
           <UserProfilePage />
         </Route>
         <Route path="/:userId/:songId">
