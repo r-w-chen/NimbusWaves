@@ -46,5 +46,13 @@ export const LoginBtn = styled.button`
     transition: .5s;
     &:hover{
         background-color: #506fc7;
+        cursor: pointer;
     }
+`;
+
+export const LoginInput = styled.input`
+    width: 80%;
+    height: 40px;
+    margin: 10px 0px;
+    font-size: 16px;
 `;

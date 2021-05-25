@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import { sessionReducer } from './session';
 import { songsReducer } from './songs';
 import { currentProfileReducer } from './currentProfile'
+import { commentsReducer } from './comments';
 const rootReducer = combineReducers({
   session: sessionReducer,
   songs: songsReducer,
-  currentProfile: currentProfileReducer
+  currentProfile: currentProfileReducer,
+  comments: commentsReducer
 });
 
 let enhancer;

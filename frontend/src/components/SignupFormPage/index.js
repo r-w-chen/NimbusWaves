@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import { LoginBtn, LoginInput } from '../styled-components/index';
 import './SignupFormPage.css';
 import { signup } from '../../store/session';
 
-const SignupFormPage = () => {
+const SignupFormPage = ({hideModal, switchToLogin}) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,7 +24,6 @@ const SignupFormPage = () => {
                 email,
                 password
             }
-    
             dispatch(signup(user)).catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
@@ -31,44 +31,53 @@ const SignupFormPage = () => {
         }
         setErrors(['Password and Confirm Password fields must match'])
     }
+
+
+    const switchForms = () => {
+        hideModal();
+        switchToLogin();
+    }
+
+
     return (
-        <form onSubmit={handleSignup}>
+        <form className="login-signup" onSubmit={handleSignup}>
             <ul>
                 {errors.map((err, i) => <li key={i}>{err}</li>)}
             </ul>
-            <label>
-                Username
-                <input
+            <LoginBtn type="button">Try as a Demo User</LoginBtn>
+            <div className="auth-separator">----- or -----</div>
+                <LoginInput
                     type='text'
                     value={username}
+                    placeholder="Your username"
                     onChange={e => setUsername(e.target.value)}
                 />
-            </label>
-            <label>
-                Email
-                <input 
+
+                <LoginInput 
                   type='text'
                   value={email}
+                  placeholder="Your email"
                   onChange={e => setEmail(e.target.value)}
                 />
-            </label>
-            <label>
-                Password
-                <input 
+
+
+                <LoginInput 
                     type='password'
                     value={password}
+                    placeholder="Your password"
                     onChange={e => setPassword(e.target.value)}
                 />
-            </label>
-            <label>
-                Confirm Password
-                <input 
+
+
+                <LoginInput 
                     type="password"
                     value={confirmPassword}
+                    placeholder="Confirm password"
                     onChange={e => setConfirmPassword(e.target.value)}
                 />
-            </label>
-            <button>Signup</button>
+
+            <LoginBtn>Signup</LoginBtn>
+            <p>Already have an account? Login <a className="signup-link" onClick={switchForms}>here</a></p>
         </form>
     )
 }

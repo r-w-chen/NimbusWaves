@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from '../../context/Modal';
-import { LoginBtn } from '../styled-components/index';
 import LoginForm from './index';
 
-function LoginFormModal() {
+function LoginFormModal({isLogin, setCurrentModal}) {
   const [showModal, setShowModal] = useState(false);
+
+
+  useEffect(() => {
+    // console.log("should I be on login?", isLogin);
+    if(isLogin){
+        setShowModal(true);
+    }
+}, [isLogin])
 
   return (
     <>
       <button onClick={() => setShowModal(true)}>Log In</button>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <LoginForm hideModal={() => setShowModal(false)}/>
+        <Modal onClose={() => {
+          setShowModal(false)
+          setCurrentModal('')
+          }}>
+          <LoginForm switchToSignup={() => setCurrentModal('signup')} hideModal={() => setShowModal(false)}/>
         </Modal>
       )}
     </>

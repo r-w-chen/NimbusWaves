@@ -24,7 +24,7 @@ export default function UserProfilePage() {
     if(profileLoaded){
         if(currentProfile){
             return (
-                <div>
+                <div className="single-page">
                     <p>Welcome to {currentProfile.user.username}'s page</p>
 
                     {/* *** Add conditional render for images */}

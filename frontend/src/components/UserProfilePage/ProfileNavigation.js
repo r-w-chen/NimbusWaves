@@ -10,9 +10,7 @@ const ProfileNav = styled.nav`
 export default function ProfileNavigation({user, renderEdit}) {
     return (
         <ProfileNav>
-            {/* <NavLink className="profile-navlink" to={`/${user}/popular-songs`}>Popular</NavLink> */}
-            <NavLink className="profile-navlink" to={`/${user}/songs`}>All Songs</NavLink>
-            {/* *** have edit render a modal form to edit properties */}
+            <a className="profile-navlink">All Songs</a>
             {renderEdit && <button>Edit</button>}
         </ProfileNav>
     )

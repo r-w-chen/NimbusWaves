@@ -28,12 +28,12 @@ function App() {
         <Route exact path="/">
           <h1>Hello from App</h1>
         </Route>
-        <Route path="/login">
+        {/* <Route path="/login">
           <LoginFormPage />
-        </Route>
-        <Route path="/signup">
+        </Route> */}
+        {/* <Route path="/signup">
           <SignupFormPage />
-        </Route>
+        </Route> */}
         <Route path="/upload">
           <UploadFormPage />
         </Route>

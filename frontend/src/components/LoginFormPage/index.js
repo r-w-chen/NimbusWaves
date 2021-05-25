@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/session';
-import { LoginBtn } from '../styled-components/index';
+import { LoginBtn, LoginInput } from '../styled-components/index';
 import './LoginForm.css';
 
-const LoginFormPage = ({hideModal}) => {
+const LoginFormPage = ({hideModal, switchToSignup}) => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const sessionUser = useSelector(state => state.session.user);
     const [password, setPassword] = useState('');
@@ -24,32 +24,37 @@ const LoginFormPage = ({hideModal}) => {
             setErrors(data.errors);       
         } 
     }
+
+    const switchForms = () => {
+        hideModal();
+        switchToSignup();
+    }
+    
     return (    
-        <form onSubmit={handleSubmit}>
+        <form className="login-signup" onSubmit={handleSubmit}>
             <ul>
                 {errors.map((err, i) => <li key={i}>{err}</li>)}
             </ul>
-            <LoginBtn>Login as a Demo User</LoginBtn>
-            <label>
-                <input
+            <LoginBtn type="button">Login as a Demo User</LoginBtn>
+
+                <LoginInput
                   type="text"
                   value={usernameOrEmail}
                   onChange={e => setUsernameOrEmail(e.target.value)}
                   placeholder="Your username or email"
                   required
                 />
-            </label>
-            <label>
-                <input 
+
+                <LoginInput 
                   type="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="Your password"
                   required
                 />
-            </label>
+
             <LoginBtn type="submit">Log In</LoginBtn>
-            <p>Don't have an account? Sign Up <Link className="signup-link" to="/signup" onClick={hideModal}>here</Link></p>
+            <p>Don't have an account? Signup <a className="signup-link" onClick={switchForms}>here</a></p>
         </form>
     )
 }
