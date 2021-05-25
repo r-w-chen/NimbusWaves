@@ -55,12 +55,10 @@ router.post('/', multipleFieldsMulterUpload(songFields) ,asyncHandler(async (req
 }));
 
 router.delete('/:id', asyncHandler(async (req, res) => {
-    //TODO: add and id key to the req to be used for searching here
-    //query for song by ID and do song.destroy();
     const { id } = req.params
     const song = await Song.findByPk(id);
     await song.destroy();
-    res.json({message: "successfully deleted"})
+    res.json({deleted: true})
 }));
 
 router.patch('/', singleMulterUpload('audioImg'), asyncHandler(async (req, res) => {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {useAudio} from '../../context/Audio';
 import { Btn, SongImg, DefaultSongImg } from '../styled-components/index';
 import UploadFormModal from '../UploadFormPage/UploadFormModal';
-
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 export default function SongContainer({song, user}) {
     const {audio, isPlaying ,setIsPlaying, currentSong, setCurrentSong}  = useAudio();
@@ -36,6 +36,7 @@ export default function SongContainer({song, user}) {
                     </div>
                     <div>
                         <UploadFormModal type="update" songId={song.id}></UploadFormModal>
+                        <DeleteModal song={song}></DeleteModal>
                     </div>
                 </div>
               

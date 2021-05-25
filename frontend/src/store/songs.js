@@ -1,5 +1,7 @@
 import {csrfFetch} from './csrf';
 import {normalize} from './utils';
+import { store } from '../index';
+import { addProfileSong } from './currentProfile';
 export const songsReducer = (state = {}, action) => {
 
     switch(action.type){
@@ -20,6 +22,17 @@ const addSong = (song) => {
         song
     }
 }
+
+// for currentProfile reducer
+// const ADD_PROFILE_SONG = 'currentProfile/addProfileSong';
+// const addProfileSong = song => {
+//     return {
+//         type: ADD_PROFILE_SONG,
+//         song
+//     }
+// }
+
+
 
 const LOAD_SONGS = "songs/loadSongs"
 const loadSongs = (songs) => {
@@ -53,6 +66,8 @@ export const uploadSong = (song) => async dispatch => {
     const data = await res.json();
 
     //still need to dispatch action creator 
+    store.dispatch(addProfileSong(data.song));
+
     dispatch(addSong(data.song));
 }
 

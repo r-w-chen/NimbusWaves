@@ -28,3 +28,9 @@ width: 160px;
 height: 160px;
 margin-bottom: 20px;
 `;
+
+export const ConfirmBox = styled.div`
+    width: 350px;
+    height: 175px;
+    padding: 15px;
+`;

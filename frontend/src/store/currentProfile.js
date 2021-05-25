@@ -8,11 +8,19 @@ export const currentProfileReducer = (state = { user: null, songs: null}, action
             return {...state, user: action.user}
         case LOAD_PROFILE_SONGS:
             return {...state, songs: action.songs}
+        case ADD_PROFILE_SONG:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.songs[action.song.id] = action.song
+            return newState;
         case UNLOAD_PROFILE:
             return {};
         case UPDATE_PROFILE_SONG:
             newState = JSON.parse(JSON.stringify(state));
             newState.songs[action.song.id] = action.song
+            return newState;
+        case REMOVE_PROFILE_SONG:
+            newState = JSON.parse(JSON.stringify(state));
+            delete newState.songs[action.songId]
             return newState;
         default:
             return state;
@@ -20,7 +28,14 @@ export const currentProfileReducer = (state = { user: null, songs: null}, action
 }
 
 //actions for: leaving profile page, loading profile page
-
+// for currentProfile reducer
+export const ADD_PROFILE_SONG = 'currentProfile/addProfileSong';
+export const addProfileSong = song => {
+    return {
+        type: ADD_PROFILE_SONG,
+        song
+    }
+}
 
 const LOAD_PROFILE = 'currentProfile/loadProfile';
 const loadProfile = user => {
@@ -70,10 +85,18 @@ export const fetchProfileSongs = userId => async dispatch => {
 }
 
 const UPDATE_PROFILE_SONG = "songs/updateProfileSong";
-const updateProfileSong = (song) => {
+const updateProfileSong = song => {
     return {
         type: UPDATE_PROFILE_SONG,
         song
+    }
+}
+
+const REMOVE_PROFILE_SONG = "songs/removeProfileSong";
+const removeProfileSong = songId => {
+    return {
+        type: REMOVE_PROFILE_SONG,
+        songId
     }
 }
 
@@ -98,12 +121,17 @@ export const patchProfileSong = song => async dispatch => {
     });
 
     const data = await res.json();
-    console.log("THE DATA I GOT BACK", data.songToUpdate);
+    // console.log("THE DATA I GOT BACK", data.songToUpdate);
     dispatch(updateProfileSong(data.songToUpdate))
 }
 
 export const deleteProfileSong = songId => async dispatch => {
+    console.log("DELETING SONG", songId);
     const res = await csrfFetch(`/api/songs/${songId}`, {
         method: 'DELETE'
     })
+    const data = await res.json()
+    if(data.deleted){
+        dispatch(removeProfileSong(songId));
+    }
 }
