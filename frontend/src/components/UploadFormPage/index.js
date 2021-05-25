@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './UploadFormPage.css';
 import { uploadSong } from '../../store/songs';
-
-const UploadFormPage = () => {
+import { patchProfileSong } from '../../store/currentProfile';
+const UploadFormPage = ({type, songId}) => {
     const [title, setTitle] = useState('');
     const [genre, setGenre] = useState('None');
     // *** possible bonus: tags, captions for a posts section
@@ -31,16 +31,23 @@ const UploadFormPage = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const song = {
+        let song = {
             title,
             genre,
             description,
-            audioFile,
             audioImg,
             userId: sessionUser.id
         }
-        setUploadStatus(true);
-        dispatch(uploadSong(song));
+        if(type === "update"){
+            song.id = songId
+            dispatch(patchProfileSong(song));
+        } else {
+            song.audioFile = audioFile;
+            setUploadStatus(true);
+            dispatch(uploadSong(song));
+        }
+      
+        
     }
 
     return (
@@ -73,13 +80,14 @@ const UploadFormPage = () => {
                     onChange={e => setDescription(e.target.value)}
                 />
             </label>
-            <label>
+            {type === "update"?  null
+            :<label>
                 Upload Song Here
                 <input 
                     type="file"
                     onChange={handleAudioFile}
                 />
-            </label>
+            </label>}
             <label>
                 Upload Song Cover Photo Here
                 <input 

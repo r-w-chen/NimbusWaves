@@ -1,5 +1,5 @@
 import {csrfFetch} from './csrf';
-
+import {normalize} from './utils';
 export const songsReducer = (state = {}, action) => {
 
     switch(action.type){
@@ -11,12 +11,6 @@ export const songsReducer = (state = {}, action) => {
         default:
             return state;
     }
-}
-const normalize = (arrOfObjects) => {
-    return arrOfObjects.reduce((normalized, obj) => {
-        normalized[obj.id] = obj;
-        return normalized;
-    } , {})
 }
 
 const ADD_SONG = "songs/addSong"
@@ -34,6 +28,8 @@ const loadSongs = (songs) => {
         songs
     }
 }
+
+
 //thunk
 export const uploadSong = (song) => async dispatch => {
     const {title, genre, description, audioFile, audioImg, userId} = song;

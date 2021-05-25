@@ -1,29 +1,9 @@
+import { useState } from 'react';
 import {useAudio} from '../../context/Audio';
-import styled from 'styled-components';
+import { Btn, SongImg, DefaultSongImg } from '../styled-components/index';
+import UploadFormModal from '../UploadFormPage/UploadFormModal';
 
-//add these to styled components page for re-use
-const Btn = styled.button`
-    padding: 2px 10px;
-    background: white;
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    &:hover{
-        border: 1px solid gray;
-    }
-`;
-const SongImg = styled.div`
-    background-image: url(${props => props.imgURL});
-    background-size: cover;
-    width: 160px;
-    height: 160px;
-    margin-bottom: 20px;
-`;
-const DefaultSongImg = styled.div`
-    background: linear-gradient(to right, red, blue);
-    width: 160px;
-    height: 160px;
-    margin-bottom: 20px;
-`;
+
 export default function SongContainer({song, user}) {
     const {audio, isPlaying ,setIsPlaying, currentSong, setCurrentSong}  = useAudio();
     const playStatus = song.id === currentSong ? "fas fa-pause-circle fa-3x play-button" : "fas fa-play-circle fa-3x play-button"
@@ -55,7 +35,7 @@ export default function SongContainer({song, user}) {
                         <h1>{song.title}</h1>
                     </div>
                     <div>
-                        <Btn><i className="far fa-edit"></i>Edit</Btn>
+                        <UploadFormModal type="update" songId={song.id}></UploadFormModal>
                     </div>
                 </div>
               
