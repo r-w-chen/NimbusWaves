@@ -32,7 +32,7 @@ export default function UserProfilePage() {
                     <img src={currentProfile.user.coverImgURL}></img>
                     <ProfileNavigation user={userId} renderEdit={sessionUser && sessionUser.id === currentProfile.user.id}/>
                     {currentProfile.songs && Object.values(currentProfile.songs).map(song => (
-                    <SongContainer key={song.id} song={song} user={currentProfile.user}/> 
+                    <SongContainer key={song.id} song={song} user={currentProfile.user} sessionUser={sessionUser}/> 
                     )
                     )}
                     <Route path={`/${userId}/popular-songs`}>

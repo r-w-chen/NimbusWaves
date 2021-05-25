@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/session';
+import { LoginBtn } from '../styled-components/index';
 import './LoginForm.css';
-const LoginFormPage = () => {
+
+const LoginFormPage = ({hideModal}) => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const sessionUser = useSelector(state => state.session.user);
     const [password, setPassword] = useState('');
@@ -27,26 +29,27 @@ const LoginFormPage = () => {
             <ul>
                 {errors.map((err, i) => <li key={i}>{err}</li>)}
             </ul>
+            <LoginBtn>Login as a Demo User</LoginBtn>
             <label>
-                Username or Email
                 <input
                   type="text"
                   value={usernameOrEmail}
                   onChange={e => setUsernameOrEmail(e.target.value)}
+                  placeholder="Your username or email"
                   required
                 />
             </label>
             <label>
-                Password
                 <input 
                   type="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
+                  placeholder="Your password"
                   required
                 />
             </label>
-            <p>Don't have an account? Sign Up <Link to="/signup">here</Link></p>
-            <button type="submit">Log In</button>
+            <LoginBtn type="submit">Log In</LoginBtn>
+            <p>Don't have an account? Sign Up <Link className="signup-link" to="/signup" onClick={hideModal}>here</Link></p>
         </form>
     )
 }

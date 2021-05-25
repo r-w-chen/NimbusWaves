@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import './UploadFormPage.css';
 import { uploadSong } from '../../store/songs';
 import { patchProfileSong } from '../../store/currentProfile';
-const UploadFormPage = ({type, songId}) => {
+const UploadFormPage = ({type, songId, hideModal}) => {
     const [title, setTitle] = useState('');
     const [genre, setGenre] = useState('None');
     // *** possible bonus: tags, captions for a posts section
@@ -46,8 +46,8 @@ const UploadFormPage = ({type, songId}) => {
             setUploadStatus(true);
             dispatch(uploadSong(song));
         }
-      
         
+        hideModal();
     }
 
     return (

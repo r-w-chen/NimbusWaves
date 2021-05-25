@@ -34,3 +34,17 @@ export const ConfirmBox = styled.div`
     height: 175px;
     padding: 15px;
 `;
+
+
+export const LoginBtn = styled.button`
+    border-radius: 3px;
+    margin: 15px;
+    width: 80%;
+    height: 40px;
+    background-color: #6288f3;
+    color: white;
+    transition: .5s;
+    &:hover{
+        background-color: #506fc7;
+    }
+`;

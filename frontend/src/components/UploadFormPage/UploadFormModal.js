@@ -11,7 +11,7 @@ export default function UploadFormModal({type, songId}) {
         <Btn onClick={() => setShowModal(true)}><i className="far fa-edit"></i>Edit</Btn>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
-            <UploadFormPage type={type} songId={songId}/>
+            <UploadFormPage type={type} songId={songId} hideModal={() => setShowModal(false)}/>
           </Modal>
         )}
       </>

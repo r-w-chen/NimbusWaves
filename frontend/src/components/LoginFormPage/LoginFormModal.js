@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
+import { LoginBtn } from '../styled-components/index';
 import LoginForm from './index';
 
 function LoginFormModal() {
@@ -10,7 +11,7 @@ function LoginFormModal() {
       <button onClick={() => setShowModal(true)}>Log In</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <LoginForm />
+          <LoginForm hideModal={() => setShowModal(false)}/>
         </Modal>
       )}
     </>

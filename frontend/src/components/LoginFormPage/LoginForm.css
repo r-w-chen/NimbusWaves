@@ -13,3 +13,8 @@ form label {
 form button {
     width: 100px;
 }
+
+
+.signup-link{
+    color: blue;
+}
