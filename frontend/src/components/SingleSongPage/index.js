@@ -20,15 +20,13 @@ export default function SingleSongPage() {
 
     const { User } = song;
 
-    // console.log("did i get the song???", song);
-
     const handleCommentEntry = e => {
         if(e.key === "Enter"){
             e.target.blur(); //focuses out of input
             const comment = {
                 content,
                 songId,
-                userId
+                userId: sessionUser.id
             }
             dispatch(postComment(comment))
 
@@ -58,6 +56,7 @@ export default function SingleSongPage() {
                 key={comment.id}
                 comment={comment} 
                 user={comment.User}
+                sessionUser={sessionUser}
                 />  
             ))}
         </section>

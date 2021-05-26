@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { SmallUserImg, SmallUserImgDefault, CommentBox, Btn, DialogBox, DialogArrow } from '../styled-components';
-import { deleteComment } from '../../store/comments';
+import { deleteComment, patchComment } from '../../store/comments';
 
 const timeStamp = {
     position: 'absolute',
@@ -29,17 +29,32 @@ const editStyles = {
 }
 
 
-export default function SingleComment({comment, user}) {
+export default function SingleComment({comment, user, sessionUser}) {
     const [showEdit, setShowEdit] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [editedContent, setEditedContent] = useState(comment.content);
     const [showConfirm, setShowConfirm] = useState(false);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        const closeEditMode = (e) => {
+            setShowConfirm(false);
+            setEditMode(false);
+        }
+
+        if(showConfirm || editMode){
+            document.addEventListener('click', closeEditMode );
+        }
+
+        return () => document.removeEventListener('click', closeEditMode);
+
+    }, [editMode, showConfirm])
+
     const reveal = () => setShowEdit(true)
     const hide = () => setShowEdit(false)
 
-    const toggleConfirm = () => {
+    const toggleConfirm = (e) => {
+        e.stopPropagation();
         setShowConfirm(prevState => !prevState);
     }
 
@@ -47,11 +62,11 @@ export default function SingleComment({comment, user}) {
         dispatch(deleteComment(comment.id));
     }   
 
-    const handleCommentEdit = e => {
+    const handleCommentEdit = async e => {
         if(e.key === "Enter"){
             e.target.blur();
-
-            //dispatch editedContent
+            const editedComment = { content: editedContent, id: comment.id }
+            await dispatch(patchComment(editedComment))
             setEditMode(false);
         }
 
@@ -67,15 +82,16 @@ export default function SingleComment({comment, user}) {
                     onChange={e => setEditedContent(e.target.value)} 
                     value={editedContent}
                     onKeyUp={e => handleCommentEdit(e)}
+                    onClick={e => e.stopPropagation()}
                     />
                     :
                     <p style={contentStyle}>{comment.content}</p>}
                 </div>
                 <p style={{...userStyle, ...timeStamp}}>{comment.createdAt.slice(0,10)}</p>
                 <div style={editStyles}> 
-                    {showEdit && (
+                    {(showEdit && sessionUser.id === user.id) && (
                     <>
-                        <Btn onClick={e => setEditMode(true)}><i className="fas fa-edit" /></Btn>
+                        <Btn onClick={e => setEditMode(prev => !prev)}><i className="fas fa-edit" /></Btn>
                         <Btn onClick={toggleConfirm}><i className="fas fa-trash-alt"/></Btn>
                     </>
                     )}

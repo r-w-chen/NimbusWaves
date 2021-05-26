@@ -2,14 +2,19 @@ import {csrfFetch} from './csrf';
 import {normalize} from './utils';
 
 export const commentsReducer = (state = {}, action) => {
+         let newState;
     switch(action.type){
         case ADD_SONG_COMMENT:
             return {...state, [action.comment.id]: action.comment};
         case SHOW_COMMENTS:
             return action.comments;
         case REMOVE_COMMENT:
-            let newState = JSON.parse(JSON.stringify(state));
+            newState = JSON.parse(JSON.stringify(state));
             delete newState[action.id];
+            return newState;
+        case UPDATE_COMMENT:
+            newState = JSON.parse(JSON.stringify(state));
+            newState[action.comment.id] = action.comment
             return newState;
         default: 
             return {};
@@ -66,4 +71,25 @@ export const deleteComment = id => async dispatch => {
     const res = await csrfFetch(`/api/comments/${id}`, {method: "DELETE"})
 
     dispatch(removeComment(id))
+}
+
+
+const UPDATE_COMMENT = 'comments/updateComment';
+const updateComment = comment => {
+    return {
+        type: UPDATE_COMMENT,
+        comment
+    }
+}
+export const patchComment = comment => async dispatch => {
+    const res = await csrfFetch('/api/comments', {
+        method: 'PATCH',
+        body: JSON.stringify(comment)
+    })
+
+    const data = await res.json();
+
+    // console.log('the data I got back', data);
+    dispatch(updateComment(data));
+    return data;
 }

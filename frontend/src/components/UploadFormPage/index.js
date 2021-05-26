@@ -47,7 +47,7 @@ const UploadFormPage = ({type, songId, hideModal}) => {
             dispatch(uploadSong(song));
         }
         
-        hideModal();
+        // hideModal();
     }
 
     return (

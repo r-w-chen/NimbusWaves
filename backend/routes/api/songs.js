@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const {multipleFieldsMulterUpload, multipleMulterUpload, singleMulterUpload, multiplePublicFileUpload, singlePublicFileUpload } = require('../../awsS3');
-const { User, Song } = require('../../db/models');
+const { User, Song, Comment } = require('../../db/models');
 const router = express.Router();
 
 
@@ -57,6 +57,11 @@ router.post('/', multipleFieldsMulterUpload(songFields) ,asyncHandler(async (req
 router.delete('/:id', asyncHandler(async (req, res) => {
     const { id } = req.params
     const song = await Song.findByPk(id);
+    await Comment.destroy({
+        where: {
+            songId: id
+        }
+    })
     await song.destroy();
     res.json({deleted: true})
 }));

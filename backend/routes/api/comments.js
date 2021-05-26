@@ -32,14 +32,22 @@ router.post('/', asyncHandler(async (req, res) => {
 router.delete('/:id', asyncHandler(async (req, res) => {
     const { id } = req.params;
     const comment = await Comment.findByPk(id);
-    console.log("DELETE REQUEST RECEIVED", comment.toJSON())
+    // console.log("DELETE REQUEST RECEIVED", comment.toJSON())
     comment.destroy();
     res.json({success: true});
 }));
 
 router.patch('/', asyncHandler(async (req, res) => {
-    console.log("PATCH REQUEST RECEIVED")
-  
+    const { content, id } = req.body;
+    // console.log("PATCH REQUEST RECEIVED", content, id);
+
+    const editedComment = await Comment.findByPk(id, {
+        include: User
+    });
+
+    await editedComment.update({ content });
+
+    res.json(editedComment);
 }));
 
 module.exports = router;

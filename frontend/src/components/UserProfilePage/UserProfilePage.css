@@ -36,5 +36,6 @@
     width: 90vw;
     background-color: white;
     height: 100%;
+    /* overflow: scroll; */
 }
 
