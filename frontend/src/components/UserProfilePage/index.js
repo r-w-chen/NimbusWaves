@@ -18,7 +18,7 @@ export default function UserProfilePage() {
        .then(() => setProfileLoaded(true))
        .then(() => dispatch(fetchProfileSongs(userId)))
       
-    }, [userId])
+    }, [userId, dispatch])
  
     // Render all songs uploaded by current user 
     if(profileLoaded){

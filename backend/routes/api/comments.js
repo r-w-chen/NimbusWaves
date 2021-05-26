@@ -29,8 +29,12 @@ router.post('/', asyncHandler(async (req, res) => {
     res.json(comment);
 }));
 
-router.delete('/', asyncHandler(async (req, res) => {
-   console.log("DELETE REQUEST RECEIVED")
+router.delete('/:id', asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const comment = await Comment.findByPk(id);
+    console.log("DELETE REQUEST RECEIVED", comment.toJSON())
+    comment.destroy();
+    res.json({success: true});
 }));
 
 router.patch('/', asyncHandler(async (req, res) => {

@@ -12,7 +12,6 @@ export const Btn = styled.button`
     }
 `;
 
-
 //images
 export const SongImg = styled.div`
     background-image: url(${props => props.imgURL});
@@ -55,4 +54,77 @@ export const LoginInput = styled.input`
     height: 40px;
     margin: 10px 0px;
     font-size: 16px;
+`;
+
+//COMMENT STYLING
+export const CommentInputBox = styled.input`
+    width: 94%;
+    height: 70%;
+`;
+
+export const CommentInputDiv = styled.div`
+    height: 40px;
+    width: 96%;
+    background: lightgray;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin: 15px;
+
+`;
+
+export const SmallUserImg = styled.div`
+    width: 40px;
+    height: 40px;
+    display: flex;
+`;
+
+export const SmallUserImgDefault = styled.div`
+    width: 40px;
+    height: 40px;
+    /* border-radius: 50%; */
+    background: linear-gradient(to right, blue, red);
+    align-self: center;
+`;
+
+export const CommentBox = styled.div`
+    display: flex;
+    background: url(${props => props.imgURL});
+    /* width: 500px; */
+    position: relative;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    margin: 15px;
+`;
+
+
+//confirm delete comment
+export const DialogBox = styled.div`
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 7px -1px rgb(0 0 0 / 40%);
+    width: 220px;
+    /* height: 50px; */
+    min-height: auto;
+    position: absolute;
+    right: 0px;
+    top: 59px;
+    z-index: 2;
+`;
+
+export const DialogArrow = styled.div`
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: -5px;
+    right: 12px;
+    /* bottom: auto; */
+    transform: rotate(45deg);
+    box-shadow: -1px -1px 1px -1px rgb(0 0 0 / 50%);
+    border: 1px solid #ccc;
+    border-width: 1px 0 0 1px;
+    background: white;
+    z-index: 1;
 `;

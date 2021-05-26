@@ -7,6 +7,10 @@ export const commentsReducer = (state = {}, action) => {
             return {...state, [action.comment.id]: action.comment};
         case SHOW_COMMENTS:
             return action.comments;
+        case REMOVE_COMMENT:
+            let newState = JSON.parse(JSON.stringify(state));
+            delete newState[action.id];
+            return newState;
         default: 
             return {};
     }
@@ -48,4 +52,18 @@ export const getSongComments = songId => async dispatch => {
     const data = await res.json();
 
     dispatch(showComments(data));
+}
+
+const REMOVE_COMMENT = 'comments/removeComment';
+const removeComment = id => {
+    return {
+        type: REMOVE_COMMENT,
+        id
+    }
+}
+
+export const deleteComment = id => async dispatch => {
+    const res = await csrfFetch(`/api/comments/${id}`, {method: "DELETE"})
+
+    dispatch(removeComment(id))
 }

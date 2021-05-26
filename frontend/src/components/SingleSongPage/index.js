@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { SongImg, DefaultSongImg } from '../styled-components/index';
+import { SongImg, DefaultSongImg, CommentInputBox, CommentInputDiv, SmallUserImg, SmallUserImgDefault } from '../styled-components/index';
 import { postComment, getSongComments } from '../../store/comments';
+import SingleComment from './SingleComment';
 export default function SingleSongPage() {
     const [content, setComment] = useState('');
     const {songId, userId} = useParams();
     const song = useSelector(state => state.songs[songId]);
     const comments = useSelector(state => Object.values(state.comments));
+    const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         dispatch(getSongComments(song.id))
         //may want to add a dispatch to search for current song 
         //in case it's not found under songs (once I limit findAll query)
-    }, [song.id])
+    }, [dispatch]) //removed song.id dependency for now
 
     const { User } = song;
 
@@ -23,9 +24,7 @@ export default function SingleSongPage() {
 
     const handleCommentEntry = e => {
         if(e.key === "Enter"){
-            console.log("ive been entered")
             e.target.blur(); //focuses out of input
-            // TODO: dispatch and handle comment submit
             const comment = {
                 content,
                 songId,
@@ -40,24 +39,26 @@ export default function SingleSongPage() {
         <>
         <section className="single-page">
             <div>
-                <Link to={`/${User.id}`}>{User.username}</Link>
+                by <Link to={`/${User.id}`}>{User.username}</Link>
                 <h1>{song.title}</h1>
                 {song.songImgURL ? <SongImg imgURL={song.songImgURL}/> : <DefaultSongImg />}
             </div>
-            <div>
-                Comments 
-                <input 
+            <CommentInputDiv>
+                <SmallUserImgDefault />
+                <CommentInputBox 
                     type="text"
+                    placeholder="Write a comment"
                     value={content}
                     onChange={(e) => setComment(e.target.value)}
                     onKeyUp={(e) => handleCommentEntry(e)}
                 />
-            </div>
+            </CommentInputDiv>
             {comments.map(comment => (
-                <div>
-                    <small>{comment.User.username}</small>
-                    <p>{comment.content}</p>
-                </div>
+                <SingleComment 
+                key={comment.id}
+                comment={comment} 
+                user={comment.User}
+                />  
             ))}
         </section>
         </>
