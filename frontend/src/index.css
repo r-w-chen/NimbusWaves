@@ -1,8 +1,7 @@
 /* TODO Add site wide styles */
 /* reset styles */
 html{
-  /* background-color: #dddcdc; */
-
+  background-color: #dddcdc;
 }
 body {
   /* padding: 50px; */
@@ -17,6 +16,7 @@ body {
 }
 #root {
  height: 100%; 
+
 }
 
 a {

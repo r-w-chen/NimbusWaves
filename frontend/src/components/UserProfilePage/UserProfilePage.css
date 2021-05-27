@@ -1,10 +1,11 @@
 .single-page{
-    /* width: 90%; */
-    /* background-color: white; */
-    height: 90vh;
-    /* overflow: scroll; */
-    /* display: flex; */
-    /* justify-content: center; */
+    /* position: absolute; */
+    margin: auto;
+    width: 90%;
+    background-color: white;
+    height: 100%;
+
+
 }
 .song-container{
     display: flex;

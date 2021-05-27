@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { restoreSession } from './store/session';
 import { fetchSongs } from './store/songs';
+import HomePage from './components/HomePage/index.js'
 import UploadFormPage from './components/UploadFormPage';
 import UserProfilePage from './components/UserProfilePage';
 import SingleSongPage from './components/SingleSongPage';
@@ -18,20 +19,13 @@ function App() {
 
   }, [dispatch]);
 
-  //rendered slightly differently from example
   return isLoaded && (
     <>
       <Navigation />
       <Switch>
         <Route exact path="/">
-          <h1>Hello from App</h1>
+          <HomePage />
         </Route>
-        {/* <Route path="/login">
-          <LoginFormPage />
-        </Route> */}
-        {/* <Route path="/signup">
-          <SignupFormPage />
-        </Route> */}
         <Route path="/upload">
           <UploadFormPage />
         </Route>
@@ -39,7 +33,6 @@ function App() {
           <UserProfilePage />
         </Route>
         <Route path="/:userId/:songId">
-          {/* render individual song page */}
           <SingleSongPage />
         </Route>
       </Switch>

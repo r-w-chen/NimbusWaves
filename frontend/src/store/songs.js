@@ -9,7 +9,7 @@ export const songsReducer = (state = {}, action) => {
             // return {...state, [state]: action.songs};
             return action.songs;
         case ADD_SONG:
-            return {...state, [state]: action.song}
+            return {...state, [action.song.id]: action.song}
         default:
             return state;
     }
@@ -64,9 +64,9 @@ export const uploadSong = (song) => async dispatch => {
     });
 
     const data = await res.json();
-
+    console.log("what's the data?", data);
     //still need to dispatch action creator 
-    store.dispatch(addProfileSong(data.song));
+    // store.dispatch(addProfileSong(data.song));
 
     dispatch(addSong(data.song));
 }

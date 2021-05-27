@@ -17,6 +17,7 @@ router.get('/user/:userId', asyncHandler(async (req, res) => {
     const {userId} = req.params;
     const userSongs = await Song.findAll({
         where: { userId },
+        include: User,
     })
     // console.log(userSongs);
     res.json({userSongs})
@@ -51,7 +52,11 @@ router.post('/', multipleFieldsMulterUpload(songFields) ,asyncHandler(async (req
 
     // *** change to create() instead of build/save()
     await song.save(); 
-    res.json({song});
+    const userOfSong = await User.findByPk(song.userId);
+    const songToSendBack = song.toJSON();
+    songToSendBack.User = userOfSong.toJSON();
+    // console.log("what am I sending back?", songToSendBack);
+    res.json({song: songToSendBack});
 }));
 
 router.delete('/:id', asyncHandler(async (req, res) => {

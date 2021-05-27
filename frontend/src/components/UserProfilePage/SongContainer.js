@@ -6,6 +6,10 @@ import { Btn, SongImg, DefaultSongImg } from '../styled-components/index';
 import UploadFormModal from '../UploadFormPage/UploadFormModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
 
+const margins = {
+    marginBottom: '20px'
+}
+
 export default function SongContainer({song, user, sessionUser}) {
     const {audio, isPlaying ,setIsPlaying, currentSong, setCurrentSong}  = useAudio();
     const playStatus = song.id === currentSong ? "fas fa-pause-circle fa-3x play-button" : "fas fa-play-circle fa-3x play-button"
@@ -27,7 +31,7 @@ export default function SongContainer({song, user, sessionUser}) {
     return (
         <div className="song-container">
             <div>
-                {song.songImgURL ? <SongImg imgURL={song.songImgURL} /> : <DefaultSongImg />}
+                {song.songImgURL ? <SongImg imgURL={song.songImgURL} style={margins}/> : <DefaultSongImg style={margins}/>}
             </div>
             <div className="play-button-container">
                 <i className={playStatus} onClick={updatePlayStatus}></i>
