@@ -15,3 +15,17 @@
     color: #2d2d8b;
     cursor: pointer;
 }
+
+.login-signup-btn{
+    font-size: 16px;
+    width: 100px;
+    color: white;
+    border-right: 1px solid black;
+    background: rgb(18, 31 ,38);
+    transition: .3s;
+}
+.login-signup-btn:hover{
+    color:white;
+    background: rgb(32, 56, 68)
+
+}

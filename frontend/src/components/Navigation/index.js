@@ -13,7 +13,9 @@ const Navigation = () => {
     let sessionLinks;
     if(sessionUser) sessionLinks = (
         <>
-        <NavLink to="/upload">Upload</NavLink> 
+        <div className="nav-item">
+            <NavLink className="nav-link" to="/upload">Upload</NavLink> 
+        </div>
         <ProfileButton user={sessionUser}/>
         
         </>
@@ -27,11 +29,25 @@ const Navigation = () => {
       )
     // *** might want to change ul to nav element
     return (
-        <ul>
-            <NavLink to="/discover">Home</NavLink>
-            {sessionLinks}
-            <a href="https://github.com/r-w-chen/sc-clone"><i className="fab fa-github fa-2x"/></a>
-        </ul>
+        <nav className="navbar">
+            <div className="nav-item-container">
+                <div className="nav-item">
+                    <NavLink className="nav-link" to="/discover">Home</NavLink>        
+                </div>
+                <div className="nav-item">
+                    <NavLink className="nav-link" to="/discover">Stream</NavLink>        
+                </div>
+            </div>
+            <input 
+            className="nav-search"
+            type="text"
+            placeholder="search (coming soon)"
+            />
+            <div className="nav-item-container">
+                {sessionLinks}
+                <a className="nav-item" href="https://github.com/r-w-chen/sc-clone"><i className="fab fa-github fa-2x"/></a>
+            </div>
+        </nav>
     )
 }
 

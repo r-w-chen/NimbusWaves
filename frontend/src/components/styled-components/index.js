@@ -18,12 +18,14 @@ export const SongImg = styled.div`
     background-size: cover;
     width: 160px;
     height: 160px;
+    /* margin-bottom: 20px; */
 `;
 
 export const DefaultSongImg = styled.div`
 background: linear-gradient(to right, red, blue);
 width: 160px;
 height: 160px;
+/* margin-bottom: 20px; */
 `;
 
 export const ConfirmBox = styled.div`
