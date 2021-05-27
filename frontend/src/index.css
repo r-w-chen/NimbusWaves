@@ -1,7 +1,6 @@
 /* TODO Add site wide styles */
 /* reset styles */
 html{
-  background-color: #dddcdc;
 }
 body {
   /* padding: 50px; */
@@ -11,11 +10,15 @@ body {
   bottom: 0px;
   left: 0px;
   right: 0px;
+
   /* display: flex;
   justify-content: center; */
+
 }
 #root {
- height: 100%; 
+  min-height: 100vh; 
+  /* min-width: 100vw; */
+  background-color: #dddcdc;
 
 }
 

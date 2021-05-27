@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/session';
 import { LoginBtn, LoginInput } from '../styled-components/index';
+import DemoLogin from '../DemoLogin/DemoLogin';
 import './LoginForm.css';
 
 const LoginFormPage = ({hideModal, switchToSignup}) => {
@@ -12,7 +13,7 @@ const LoginFormPage = ({hideModal, switchToSignup}) => {
     const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
 
-    if (sessionUser) return <Redirect to="/" />;
+    if (sessionUser) return <Redirect to="/discover" />;
     
 
     const handleSubmit = async (e) => {
@@ -25,6 +26,8 @@ const LoginFormPage = ({hideModal, switchToSignup}) => {
         } 
     }
 
+  
+
     const switchForms = () => {
         hideModal();
         switchToSignup();
@@ -35,7 +38,7 @@ const LoginFormPage = ({hideModal, switchToSignup}) => {
             <ul>
                 {errors.map((err, i) => <li key={i}>{err}</li>)}
             </ul>
-            <LoginBtn type="button">Login as a Demo User</LoginBtn>
+                <DemoLogin />
 
                 <LoginInput
                   type="text"

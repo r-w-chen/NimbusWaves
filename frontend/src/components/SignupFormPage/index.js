@@ -4,6 +4,8 @@ import { Redirect, Link } from 'react-router-dom';
 import { LoginBtn, LoginInput } from '../styled-components/index';
 import './SignupFormPage.css';
 import { signup } from '../../store/session';
+import DemoLogin from '../DemoLogin/DemoLogin';
+
 
 const SignupFormPage = ({hideModal, switchToLogin}) => {
     const [username, setUsername] = useState('');
@@ -44,7 +46,7 @@ const SignupFormPage = ({hideModal, switchToLogin}) => {
             <ul>
                 {errors.map((err, i) => <li key={i}>{err}</li>)}
             </ul>
-            <LoginBtn type="button">Try as a Demo User</LoginBtn>
+            <DemoLogin />
             <div className="auth-separator">----- or -----</div>
                 <LoginInput
                     type='text'

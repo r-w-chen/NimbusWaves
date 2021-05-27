@@ -28,8 +28,9 @@ const Navigation = () => {
     // *** might want to change ul to nav element
     return (
         <ul>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/discover">Home</NavLink>
             {sessionLinks}
+            <a href="https://github.com/r-w-chen/sc-clone"><i className="fab fa-github fa-2x"/></a>
         </ul>
     )
 }

@@ -4,8 +4,12 @@
     width: 90%;
     background-color: white;
     height: 100%;
-
-
+    /* overflow-y: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;   */
+}
+.single-page::-webkit-scrollbar{
+    /* display: none; */
 }
 .song-container{
     display: flex;
