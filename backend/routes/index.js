@@ -4,6 +4,12 @@ const apiRouter = require('./api');
 
 router.use('/api', apiRouter);
 
+// temporary workaround for a strange bug
+router.get('/:userId/:songId', (req,res) => {
+  console.log('why am I getting here?')
+  res.end();
+})
+
 // router.get('/hello/world', function(req, res) {
 //   res.cookie('XSRF-TOKEN', req.csrfToken());
 //   res.send('Hello World!');

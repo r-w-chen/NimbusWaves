@@ -5,6 +5,7 @@ import { fetchProfile, fetchProfileSongs } from '../../store/currentProfile';
 import ProfileNavigation from './ProfileNavigation';
 import SongContainer from './SongContainer';
 import './UserProfilePage.css';
+import UserHeader from './UserHeader';
 export default function UserProfilePage() {
     const { userId } = useParams();
     // const [onSessionUserPage, setOnSessionUserPage] = useState(false);
@@ -25,12 +26,9 @@ export default function UserProfilePage() {
         if(currentProfile){
             return (
                 <div className="single-page">
-                    <p>Welcome to {currentProfile.user.username}'s page</p>
 
-                    {/* *** Add conditional render for images */}
-                    {<img src={currentProfile.user.profileImgURL}></img>}
-                    <img src={currentProfile.user.coverImgURL}></img>
-                    <ProfileNavigation user={userId} renderEdit={sessionUser && sessionUser.id === currentProfile.user.id}/>
+                    <UserHeader user={currentProfile.user} sessionUser={sessionUser}/>
+                    <ProfileNavigation user={currentProfile.user} renderEdit={sessionUser && sessionUser.id === currentProfile.user.id}/>
                     {currentProfile.songs && Object.values(currentProfile.songs).map(song => (
                     <SongContainer key={song.id} song={song} user={currentProfile.user} sessionUser={sessionUser}/> 
                     )

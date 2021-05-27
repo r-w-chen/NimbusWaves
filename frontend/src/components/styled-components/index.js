@@ -74,9 +74,12 @@ export const CommentInputDiv = styled.div`
 `;
 
 export const SmallUserImg = styled.div`
+    background-image: url(${props => props.imgURL});
+    background-size: cover;
     width: 40px;
     height: 40px;
-    display: flex;
+    align-self: center;
+
 `;
 
 export const SmallUserImgDefault = styled.div`
@@ -127,4 +130,44 @@ export const DialogArrow = styled.div`
     border-width: 1px 0 0 1px;
     background: white;
     z-index: 1;
+`;
+
+//user profile 
+//user edit
+
+export const UserHeaderDefault = styled.div`
+    width: 100%;
+    background: linear-gradient(to right, pink, teal);
+    height: 260px;
+    position: relative;
+`;
+export const UserHeaderImg = styled.div`
+    position: relative;
+    width: 100%;
+    background-image: url(${props => props.coverImgURL});
+    background-size: cover;
+    height: 260px;
+`;
+
+export const UserProfileDefault = styled.div`
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(to right, pink, teal);
+    padding: 20px;
+    transform: rotate(45deg);
+`;
+export const UserProfileImg = styled.div`
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-image: url(${props => props.profileImgURL});
+    background-size: cover;
+    padding: 20px;
 `;

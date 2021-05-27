@@ -46,6 +46,7 @@ export default function SingleComment({comment, user, sessionUser}) {
             document.addEventListener('click', closeEditMode );
         }
 
+
         return () => document.removeEventListener('click', closeEditMode);
 
     }, [editMode, showConfirm])

@@ -1,3 +1,11 @@
+.single-page{
+    /* width: 90%; */
+    /* background-color: white; */
+    height: 90vh;
+    /* overflow: scroll; */
+    /* display: flex; */
+    /* justify-content: center; */
+}
 .song-container{
     display: flex;
     margin: 20px;
@@ -31,11 +39,54 @@
     color: rgb(148, 204, 223);
 }
 
+/* EDIT FORM STYLING */
 
-.single-page{
-    width: 90vw;
-    background-color: white;
-    height: 100%;
-    /* overflow: scroll; */
+.edit-header {
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 10px;
+    width: 80%;
+}
+.edit-header h1 {
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+}
+.edit-form-container{
+    width: 400px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+}
+.edit-label{
+    font-size: 12px;
+    width: 80%;
 }
 
+.profile-img-input{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.profile-img-input + label{
+    font-size: 12px;
+    width: 80%;
+    text-align: center;
+    border-radius: 3px;
+    padding: 12px;
+    margin: 10px 0px;
+    color: white;
+    background: rgb(180, 180, 180);
+    display: inline-block;
+    cursor: pointer;
+    transition: .2s;
+
+}
+.profile-img-input:focus + label,
+.profile-img-input + label:hover {
+    background: rgb(201, 200, 200);
+}

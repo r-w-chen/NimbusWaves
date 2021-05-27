@@ -22,6 +22,10 @@ export const currentProfileReducer = (state = { user: null, songs: null}, action
             newState = JSON.parse(JSON.stringify(state));
             delete newState.songs[action.songId]
             return newState;
+        case UPDATE_PROFILE:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.user = action.user;
+            return newState;
         default:
             return state;
     }
@@ -134,4 +138,31 @@ export const deleteProfileSong = songId => async dispatch => {
     if(data.deleted){
         dispatch(removeProfileSong(songId));
     }
+}
+
+
+const UPDATE_PROFILE = "currentProfile/updateProfile"
+const updateProfile = user => {
+    return {
+        type: UPDATE_PROFILE,
+        user
+    }
+}
+export const patchUserProfile = user => async dispatch => {
+    console.log('did I get here?', user);
+    const { id, username, profileImg, coverImg} = user;
+    const form = new FormData();
+    form.append('id', id);
+    form.append('username', username);
+    if(profileImg) form.append('profileImg', profileImg);
+    if(coverImg) form.append('coverImg', coverImg);
+    const res = await csrfFetch(`/api/users/`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "multipart/form-data",
+            },
+        body: form,
+    })
+    const data = await res.json();
+    dispatch(updateProfile(data));
 }

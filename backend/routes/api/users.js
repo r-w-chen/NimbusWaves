@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const {multipleFieldsMulterUpload, multipleMulterUpload, singleMulterUpload, multiplePublicFileUpload, singlePublicFileUpload } = require('../../awsS3');
 const { User } = require('../../db/models');
 
 const router = express.Router();
@@ -51,5 +52,27 @@ router.get('/:userId', asyncHandler(async (req, res) => {
   // console.log(user)
   res.json(user);
 }));
+
+const userFields = [
+  {name: 'profileImg'},
+  {name: 'coverImg'}
+]
+router.patch('/', multipleFieldsMulterUpload(userFields), asyncHandler(async (req, res) => {
+  const { id, username } = req.body;
+  let profileImgURL = null;
+  if(req.files.profileImg){
+    profileImgURL = await singlePublicFileUpload(req.files.profileImg[0]);
+  }
+  let coverImgURL = null;
+  if(req.files.coverImg){
+    // console.log(req.files.coverImg);
+    coverImgURL = await singlePublicFileUpload(req.files.coverImg[0]);
+  }
+
+  const editedUser = await User.findByPk(id);
+  editedUser.update({username, profileImgURL, coverImgURL});
+  console.log(editedUser.toJSON());
+  res.json(editedUser);
+}))
 
 module.exports = router;

@@ -18,7 +18,7 @@ router.get('/user/:userId', asyncHandler(async (req, res) => {
     const userSongs = await Song.findAll({
         where: { userId },
     })
-    console.log(userSongs);
+    // console.log(userSongs);
     res.json({userSongs})
 }))
 

@@ -4,9 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SongImg, DefaultSongImg, CommentInputBox, CommentInputDiv, SmallUserImg, SmallUserImgDefault } from '../styled-components/index';
 import { postComment, getSongComments } from '../../store/comments';
 import SingleComment from './SingleComment';
+
+
 export default function SingleSongPage() {
     const [content, setComment] = useState('');
-    const {songId, userId} = useParams();
+    const { songId, userId } = useParams();
     const song = useSelector(state => state.songs[songId]);
     const comments = useSelector(state => Object.values(state.comments));
     const sessionUser = useSelector(state => state.session.user);
