@@ -42,7 +42,7 @@ function App() {
           <SingleSongPage />
         </Route>
       </Switch>
-      {showPlayBar && < PlayBar />}
+      {showPlayBar && < PlayBar hidePlayBar={() => setShowPlayBar(false)}/>}
     </>
   );
 }
