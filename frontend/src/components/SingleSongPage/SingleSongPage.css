@@ -1,0 +1,16 @@
+.song-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.song-header__img{
+    margin: 20px;
+}
+
+.song-header__title{
+    margin: 20px;
+    display: flex;
+}
+.song-header__artist{
+    margin-left: 15px;
+}

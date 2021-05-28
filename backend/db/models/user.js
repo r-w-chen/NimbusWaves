@@ -62,8 +62,8 @@ module.exports = (sequelize, DataTypes) => {
   //****** USER INSTANCE METHODS  *********/
   //return an obj with User instance infor that is safe to save to a JWT
   User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
-    const { id, username, email } = this; // context will be the User instance
-    return { id, username, email };
+    const { id, username, email, profileImgURL, coverImgURL } = this; // context will be the User instance
+    return { id, username, email, profileImgURL, coverImgURL };
   };
 
   //returns a boolean that tells if there is a match with the User instance's hashedPassword

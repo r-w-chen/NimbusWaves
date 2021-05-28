@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-import {useAudio} from '../../context/Audio';
-import { Btn, SongImg, DefaultSongImg } from '../styled-components/index';
+import { useAudio } from '../../context/Audio';
+import { SongImg, DefaultSongImg } from '../styled-components/index';
 import UploadFormModal from '../UploadFormPage/UploadFormModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
 
@@ -26,6 +25,11 @@ export default function SongContainer({song, user, sessionUser}) {
             setCurrentSong(song.id)
         } 
     }
+
+    useEffect(() => {
+        if(audio.ended) setCurrentSong(null);
+    }, [audio.ended])
+
     const onSessionUserPage = !!(sessionUser && sessionUser.id === user.id)
 
     return (

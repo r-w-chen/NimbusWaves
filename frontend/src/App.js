@@ -10,9 +10,11 @@ import UserProfilePage from './components/UserProfilePage';
 import SingleSongPage from './components/SingleSongPage';
 import Navigation from "./components/Navigation";
 import PlayBar from './components/PlayBar';
+import { useAudio } from "./context/Audio";
 function App() {
+  // const {isPlaying} = useAudio();
   const [isLoaded, setIsLoaded] = useState(false)
-  const [showPlayBar, setShowPlayBar] = useState(false); //for later when i want to conditionally render playbar
+  const [showPlayBar, setShowPlayBar] = useState(true); //for later when i want to conditionally render playbar
   const dispatch = useDispatch();
 
   useEffect(() => {
