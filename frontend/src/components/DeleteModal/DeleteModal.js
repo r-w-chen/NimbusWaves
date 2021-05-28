@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import { Btn, ConfirmBox } from '../styled-components/index';
 import { deleteProfileSong } from '../../store/currentProfile';
+import { removeSong } from '../../store/songs';
 
 export default function DeleteModal({song}) {
     const [showModal, setShowModal] = useState(false);
@@ -10,6 +11,9 @@ export default function DeleteModal({song}) {
 
     const handleDelete = () => {
         dispatch(deleteProfileSong(song.id))
+        .then((deleted) => {
+            if(deleted) dispatch(removeSong(song.id));
+        })
         setShowModal(false);
     }
     return (

@@ -23,7 +23,9 @@ export default function SingleSongPage() {
             setIsPlaying(false);
             setCurrentSong(null);
         } else {
-            audio.src = song.audioURL;
+            if(audio.src !== song.audioURL) {
+                audio.src = song.audioURL;
+            }
             audio.play();
             setIsPlaying(true);
             setCurrentSong(song.id)

@@ -137,6 +137,7 @@ export const deleteProfileSong = songId => async dispatch => {
     const data = await res.json()
     if(data.deleted){
         dispatch(removeProfileSong(songId));
+        return true;
     }
 }
 

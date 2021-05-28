@@ -19,7 +19,10 @@ export default function SongContainer({song, user, sessionUser}) {
             setIsPlaying(false);
             setCurrentSong(null);
         } else {
-            audio.src = song.audioURL;
+            //ensures that we don't reassign the src so it doesn't restart the song
+            if(audio.src !== song.audioURL) {
+                audio.src = song.audioURL;
+            }
             audio.play();
             setIsPlaying(true);
             setCurrentSong(song.id)

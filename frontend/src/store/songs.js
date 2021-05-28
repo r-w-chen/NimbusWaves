@@ -3,15 +3,26 @@ import {normalize} from './utils';
 import { store } from '../index';
 import { addProfileSong } from './currentProfile';
 export const songsReducer = (state = {}, action) => {
-
+    let newState
     switch(action.type){
         case LOAD_SONGS:
             // return {...state, [state]: action.songs};
             return action.songs;
         case ADD_SONG:
             return {...state, [action.song.id]: action.song}
+        case REMOVE_SONG:
+            newState = JSON.parse(JSON.stringify(state))
+            delete newState[action.id];
+            return newState;
         default:
             return state;
+    }
+}
+const REMOVE_SONG = 'songs/removeSong'
+export const removeSong = (id) => {
+    return {
+        type: REMOVE_SONG,
+        id
     }
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components';
 import { useAudio } from '../../context/Audio';
 
@@ -16,9 +16,11 @@ const ControlDiv = styled.div`
 `;
 
 export default function PlayBar() {
-  const {audio, isPlaying, setIsPlaying, playOrPause} = useAudio();
+  const {audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong} = useAudio();
     const [progress, setProgress] = useState(audio.currentTime);
     const [volume, setVolume] = useState(50);
+    // const songRef = useRef(currentSong);
+
     //duration
     //currentTime 
     const handleVolume = (e) => {
@@ -29,11 +31,11 @@ export default function PlayBar() {
       setProgress(e.target.value);
       audio.currentTime = progress / 100 * audio.duration;
     }
+
     useEffect(() => {
       let timer;
       if(isPlaying){
         timer = setInterval(() => {
-            // setProgress(prevState => prevState)
             //every second, currentTime goes up by 1 
             //currentTime / duration * 100 
             setProgress(audio.currentTime / audio.duration * 100);
