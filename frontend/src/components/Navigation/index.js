@@ -5,11 +5,12 @@ import './Navigation.css';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormPage/LoginFormModal';
 import SignupFormModal from '../SignupFormPage/SignupFormModal';
+import { useLoginSignup } from '../../context/LoginSignup';
 
 const Navigation = () => {
-    const [currentModal, setCurrentModal] = useState('');
+    const { currentModal, setCurrentModal } = useLoginSignup();
     const sessionUser = useSelector(state => state.session.user);
-    // console.log(currentModal);
+
     let sessionLinks;
     if(sessionUser) sessionLinks = (
         <>
@@ -45,7 +46,7 @@ const Navigation = () => {
             />
             <div className="nav-item-container">
                 {sessionLinks}
-                <a className="nav-item" href="https://github.com/r-w-chen/sc-clone"><i className="fab fa-github fa-2x"/></a>
+                <a className="nav-item" href="https://github.com/r-w-chen/sc-clone"  target='_blank'><i className="fab fa-github fa-2x"/></a>
             </div>
         </nav>
     )

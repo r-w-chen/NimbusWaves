@@ -1,14 +1,12 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import LoginFormModal from '../LoginFormPage';
-import SignupFormModal from '../SignupFormPage';
+import { useLoginSignup } from '../../context/LoginSignup';
+
 import './LandingPage.css';
 
 export default function LandingPage() {
     const sessionUser = useSelector(state => state.session.user);
-    const [currentModal, setCurrentModal] = useState('');
-
+    const {setCurrentModal} = useLoginSignup();
     if(sessionUser) return <Redirect to="/discover" />
 
     
@@ -18,7 +16,7 @@ export default function LandingPage() {
                 <h1>NimbusWaves</h1>
                 <p>Next generation sounds right at your fingertips</p>
             </header>
-            <button className="landing-signup-btn" onClick={e => setCurrentModal('signup')}>Get Started Here</button>
+            <button className="landing-signup-btn" onClick={() => setCurrentModal('signup')}>Get Started Here</button>
         </div>
     )
 }

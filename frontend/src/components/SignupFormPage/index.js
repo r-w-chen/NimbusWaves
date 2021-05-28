@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { LoginBtn, LoginInput } from '../styled-components/index';
 import './SignupFormPage.css';
 import { signup } from '../../store/session';
 import DemoLogin from '../DemoLogin/DemoLogin';
+import { useLoginSignup } from '../../context/LoginSignup';
 
 
 const SignupFormPage = ({hideModal, switchToLogin}) => {
@@ -13,6 +14,7 @@ const SignupFormPage = ({hideModal, switchToLogin}) => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState([]);
+    const {setCurrentModal} = useLoginSignup();
     const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch();
     
@@ -30,8 +32,9 @@ const SignupFormPage = ({hideModal, switchToLogin}) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
               }); 
+            setCurrentModal('');
         }
-        setErrors(['Password and Confirm Password fields must match'])
+        else setErrors(['Password and Confirm Password fields must match'])
     }
 
 
