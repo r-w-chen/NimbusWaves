@@ -1,0 +1,37 @@
+.landing-image{
+    background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d4269e9f-71af-4777-8f2b-6a375c899fdf/dakur2f-dec9cd75-2809-4e89-9db5-93e2926c9807.jpg/v1/fill/w_1281,h_624,q_70,strp/nto_001_07_by_salmonickatelier_dakur2f-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTUwIiwicGF0aCI6IlwvZlwvZDQyNjllOWYtNzFhZi00Nzc3LThmMmItNmEzNzVjODk5ZmRmXC9kYWt1cjJmLWRlYzljZDc1LTI4MDktNGU4OS05ZGI1LTkzZTI5MjZjOTgwNy5qcGciLCJ3aWR0aCI6Ijw9MTk1MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.bRrb73QFI9CsbLPwiyb3BlO408QNqQIKYATfMn34rn0");
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.landing-header h1{
+    color: whitesmoke;
+    font-family: 'Pattaya', sans-serif;
+    font-size: 5em;
+    background: rgba(0,0,0,.5)
+}
+.landing-header p{
+    font-size: 20px;
+    color: whitesmoke;
+    text-align: center;
+}
+
+.landing-signup-btn{
+    font-family: 'Pattaya', sans-serif;
+    color:white;
+
+    width: 200px;
+    font-size: 25px;
+    padding: 10px;
+    background: #6288f3;
+    border-radius: 25px;
+    border: 2px solid black;
+    transition: .5s;
+}
+.landing-signup-btn:hover{
+    background-color: rgba(0,0,0,.5);
+}

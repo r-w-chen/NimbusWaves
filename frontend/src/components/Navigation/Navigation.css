@@ -1,0 +1,73 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: rgb(56, 56, 56);
+    color: rgb(207, 207, 207);
+}
+.nav-item-container{
+    display: flex;
+    /* align-items: center; */
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.nav-item-container li {
+    height: 100%;
+    align-self: center;
+}
+.nav-item{
+    display: flex;
+    cursor: pointer;
+    height: 50px;
+    padding: 0px 10px;
+    transition: .3s;
+}
+.nav-item:hover{ 
+   background: rgb(97, 97, 97);
+}
+
+.navbar a,
+.navbar i{
+    align-self: center;
+}
+
+.nav-item:hover,
+.nav-link:hover {
+   color: white;
+}
+.nav-user{
+    display: flex;
+    position: relative;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.profile-dropdown{
+    position: absolute;
+    background: white;
+    bottom: -38px;
+    right: 0px;
+    border: 1px solid black;
+    z-index: 2;
+}
+.profile-dropdown li,
+.profile-dropdown a {
+    color: black;
+    /* border: 1px solid black; */
+}
+.profile-dropdown li:hover{
+    background: rgb(228, 228, 228);
+}
+
+
+.nav-search{
+    /* visibility: hidden; */
+    height: 40px;
+    width: 300px;
+    border-radius: 3px;
+}
+.nav-item-container div + div{
+    border-left: 1px solid black;
+}

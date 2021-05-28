@@ -18,12 +18,18 @@ export const SongImg = styled.div`
     background-size: cover;
     width: 160px;
     height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const DefaultSongImg = styled.div`
-background: linear-gradient(to right, red, blue);
-width: 160px;
-height: 160px;
+    background: linear-gradient(to right, pink, teal);
+    width: 160px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const ConfirmBox = styled.div`
@@ -84,7 +90,7 @@ export const SmallUserImgDefault = styled.div`
     width: 40px;
     height: 40px;
     /* border-radius: 50%; */
-    background: linear-gradient(to right, blue, red);
+    background: linear-gradient(to right, pink, teal);
     align-self: center;
 `;
 

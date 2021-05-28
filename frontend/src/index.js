@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ModalProvider } from './context/Modal';
 import { AudioProvider } from './context/Audio';
+import { LoginSignupProvider } from'./context/LoginSignup'
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { restoreCSRF, csrfFetch } from './store/csrf';
@@ -26,9 +27,11 @@ function Root() {
     <Provider store={store}>
       <AudioProvider>
       <ModalProvider>
+      <LoginSignupProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      </LoginSignupProvider>
       </ModalProvider>
       </AudioProvider>
     </Provider>

@@ -2,6 +2,14 @@ import { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
+import { SmallUserImg, SmallUserImgDefault } from '../styled-components/index';
+
+const circle = { 
+    borderRadius: '50%',
+    width: '30px', 
+    height: '30px',
+    marginRight: '10px'
+};
 const ProfileButton = ({user}) => {
     const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch();
@@ -25,17 +33,22 @@ const ProfileButton = ({user}) => {
     //**** may want to create a variable containing menu items in a container ****
     return (
     <>    
-    <i className="far fa-user-circle" onClick={e => setShowMenu(prevState => !prevState)}></i>
-    {showMenu && (
+    <div className="nav-user nav-item" onClick={e => setShowMenu(prevState => !prevState)}>
+      {!!user.profileImgURL ? <SmallUserImg style={circle} imgURL={user.profileImgURL}/> : <SmallUserImgDefault style={circle}/>}
+      <p>{user.username}</p>
+      {showMenu && (
        <ul className="profile-dropdown">
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <NavLink to={`/${user.id}`}>Profile</NavLink>
             <li>
-                <button onClick={handleLogout}>Logout</button>
+                
+                <NavLink to={`/${user.id}`}><i className="fas fa-user-alt fa-xs"></i> Profile</NavLink>
+            </li>
+            <li>
+                <a onClick={handleLogout}><i className="fas fa-door-open fa-xs"></i> Logout</a>
             </li>
        </ul> 
     )}
+    </div>
+    
     </>    
     )
 }

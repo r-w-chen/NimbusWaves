@@ -13,7 +13,7 @@
     margin: auto;
     display: grid;
 	grid-template-columns: repeat(4,25%);
-	grid-template-rows: 25% auto;
+	grid-template-rows: auto;
     row-gap: 20px;
     justify-items: center;
     width: 90%;

@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useLoginSignup } from '../../context/LoginSignup';
 import { Modal } from '../../context/Modal';
-import { LoginBtn } from '../styled-components/index';
-
 import SignupFormPage from './index.js';
 
 
 export default function SignupFormModal({isSignup, setCurrentModal}) {
     const [showModal, setShowModal] = useState(false);
-    // console.log("Should Signup be revealed?" , isSignup)
-
+    
     useEffect(() => {
-        if(isSignup){
-            setShowModal(true);
-        }
+        if(isSignup) setShowModal(true);
+        
     }, [isSignup])
 
     return (
         <>
-          <button onClick={() => setShowModal(true)}>Signup</button>
+          <button className="login-signup-btn" onClick={() => setShowModal(true)}>Signup</button>
           {showModal && (
             <Modal onClose={() => {
               setShowModal(false)

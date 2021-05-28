@@ -5,12 +5,14 @@ import { login } from '../../store/session';
 import { LoginBtn, LoginInput } from '../styled-components/index';
 import DemoLogin from '../DemoLogin/DemoLogin';
 import './LoginForm.css';
+import { useLoginSignup } from '../../context/LoginSignup';
 
 const LoginFormPage = ({hideModal, switchToSignup}) => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const sessionUser = useSelector(state => state.session.user);
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
+    const {setCurrentModal} = useLoginSignup()
     const dispatch = useDispatch();
 
     if (sessionUser) return <Redirect to="/discover" />;
@@ -24,7 +26,9 @@ const LoginFormPage = ({hideModal, switchToSignup}) => {
         if(data.errors){
             setErrors(data.errors);       
         } 
+        setCurrentModal('');
     }
+    
 
   
 
