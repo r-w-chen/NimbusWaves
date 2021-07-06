@@ -20,7 +20,7 @@ export function AudioProvider({children}){
             audio.play();
             setIsPlaying(true);
             setCurrentSong(lastPlayed.current);
-            console.log("CURRENT SONG", lastPlayed)
+            // console.log("CURRENT SONG", lastPlayed)
         }
     }
     useEffect(() => {

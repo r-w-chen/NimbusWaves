@@ -25,7 +25,6 @@ router.post('/', asyncHandler(async (req, res) => {
     let associatedUser = await User.findByPk(userId);
     associatedUser = associatedUser.toJSON();
     comment.User = associatedUser;
-    console.log(comment)
     res.json(comment);
 }));
 

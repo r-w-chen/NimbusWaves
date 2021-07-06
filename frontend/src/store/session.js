@@ -33,7 +33,7 @@ export const login = (credential, password) => async dispatch => {
              })
          })
         const data = await res.json();
-        console.log("user", data)
+        // console.log("user", data)
         dispatch(startSession(data.user));
         return data;
     } catch(err) {

@@ -6,7 +6,6 @@ router.use('/api', apiRouter);
 
 // temporary workaround for a strange bug
 router.get('/:userId/:songId', (req,res) => {
-  console.log('why am I getting here?')
   res.end();
 })
 

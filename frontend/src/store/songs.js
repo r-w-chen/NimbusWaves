@@ -75,7 +75,7 @@ export const uploadSong = (song) => async dispatch => {
     });
 
     const data = await res.json();
-    console.log("what's the data?", data);
+    // console.log("what's the data?", data);
     //still need to dispatch action creator 
     // store.dispatch(addProfileSong(data.song));
 

@@ -11,9 +11,11 @@
     "db:redo": "npm run db:seed:undo:all && npm run db:migrate:undo:all && npm run db:migrate && npm run db:seed:all",
     "db:seed:all": "dotenv sequelize-cli db:seed:all",
     "db:seed:undo:all": "dotenv sequelize-cli db:seed:undo:all",
+    "sequelize": "sequelize",
+    "sequelize-cli": "sequelize-cli",
     "start": "per-env",
-    "start:development": "dotenv nodemon ./bin/www",
-    "start:production": "dotenv ./bin/www"
+    "start:development": "nodemon -r dotenv/config ./bin/www",
+    "start:production": "node ./bin/www"
   },
   "keywords": [],
   "author": "",
