@@ -130,7 +130,7 @@ export const patchProfileSong = song => async dispatch => {
 }
 
 export const deleteProfileSong = songId => async dispatch => {
-    console.log("DELETING SONG", songId);
+    // console.log("DELETING SONG", songId);
     const res = await csrfFetch(`/api/songs/${songId}`, {
         method: 'DELETE'
     })
@@ -150,7 +150,6 @@ const updateProfile = user => {
     }
 }
 export const patchUserProfile = user => async dispatch => {
-    console.log('did I get here?', user);
     const { id, username, profileImg, coverImg} = user;
     const form = new FormData();
     form.append('id', id);

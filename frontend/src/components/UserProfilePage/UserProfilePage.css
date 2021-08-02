@@ -95,3 +95,25 @@
 .profile-img-input + label:hover {
     background: rgb(201, 200, 200);
 }
+
+
+.error-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background: #adadad;
+}
+.error-header{
+    font-size: 3rem;
+    margin: 10px;
+}
+.error-link{
+    font-size: 1.5rem;
+    margin: 10px;
+    transition: .2s;
+}
+.error-link:hover{
+    color: #dddcdc;
+}

@@ -71,7 +71,7 @@ router.patch('/', multipleFieldsMulterUpload(userFields), asyncHandler(async (re
 
   const editedUser = await User.findByPk(id);
   editedUser.update({username, profileImgURL, coverImgURL});
-  console.log(editedUser.toJSON());
+  // console.log(editedUser.toJSON());
   res.json(editedUser);
 }))
 

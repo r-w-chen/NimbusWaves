@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Route } from 'react-router-dom';
+import { useParams, Route, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProfile, fetchProfileSongs } from '../../store/currentProfile';
 import ProfileNavigation from './ProfileNavigation';
@@ -23,7 +23,7 @@ export default function UserProfilePage() {
     
     // Render all songs uploaded by current user 
     if(profileLoaded){
-        if(currentProfile){
+        if(currentProfile.user){
             return (
                 <div className="single-page">
 
@@ -43,8 +43,9 @@ export default function UserProfilePage() {
             )
         } else {
             return (
-                <div>
-                    Profile Not Found
+                <div className="error-page">
+                    <h1 className="error-header">Profile Not Found</h1>
+                    <Link className="error-link" to="/discover">Return Home</Link>
                 </div>
             )
         }
