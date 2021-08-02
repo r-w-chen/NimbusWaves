@@ -38,12 +38,11 @@ const ProfileButton = ({user}) => {
       <p>{user.username}</p>
       {showMenu && (
        <ul className="profile-dropdown">
-            <li>
-                
+            <li className="profile-btn">  
                 <NavLink to={`/${user.id}`}><i className="fas fa-user-alt fa-xs"></i> Profile</NavLink>
             </li>
             <li>
-                <a onClick={handleLogout}><i className="fas fa-door-open fa-xs"></i> Logout</a>
+                <button onClick={handleLogout}><i className="fas fa-door-open fa-xs"></i> Logout</button>
             </li>
        </ul> 
     )}

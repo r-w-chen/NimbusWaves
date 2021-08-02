@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SongImg, DefaultSongImg, CommentInputBox, CommentInputDiv, SmallUserImg, SmallUserImgDefault } from '../styled-components/index';
 import { postComment, getSongComments } from '../../store/comments';
 import { useAudio } from '../../context/Audio';
+import { useLoginSignup } from '../../context/LoginSignup';
 import SingleComment from './SingleComment';
 import './SingleSongPage.css';
 
@@ -12,6 +13,7 @@ export default function SingleSongPage() {
     const song = useSelector(state => state.songs[songId]);
     const [content, setComment] = useState('');
     const {audio, isPlaying ,setIsPlaying, currentSong, setCurrentSong}  = useAudio();
+    const { setCurrentModal } = useLoginSignup();
     const playStatus = song.id === currentSong ? "fas fa-pause-circle fa-3x play-button" : "fas fa-play-circle fa-3x play-button"
     const comments = useSelector(state => Object.values(state.comments));
     const sessionUser = useSelector(state => state.session.user);
@@ -46,6 +48,10 @@ export default function SingleSongPage() {
 
     const handleCommentEntry = e => {
         if(e.key === "Enter"){
+            if(!sessionUser){
+                setCurrentModal('login');
+                return;
+            }
             e.target.blur(); //focuses out of input
             const comment = {
                 content,
@@ -76,13 +82,16 @@ export default function SingleSongPage() {
             
             <CommentInputDiv>
                 <SmallUserImgDefault />
-                <CommentInputBox 
-                    type="text"
-                    placeholder="Write a comment"
-                    value={content}
-                    onChange={(e) => setComment(e.target.value)}
-                    onKeyUp={(e) => handleCommentEntry(e)}
-                />
+                {/* <label for='comment-input'> */}
+                    <CommentInputBox 
+                        id='comment-input'
+                        type="text"
+                        placeholder="Write a comment and hit 'Enter' to submit"
+                        value={content}
+                        onChange={(e) => setComment(e.target.value)}
+                        onKeyUp={(e) => handleCommentEntry(e)}
+                    />
+                {/* </label> */}
             </CommentInputDiv>
             {comments.map(comment => (
                 <SingleComment 
