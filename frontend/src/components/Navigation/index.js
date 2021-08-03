@@ -39,11 +39,11 @@ const Navigation = () => {
                     <NavLink className="nav-link" to="/discover">Stream</NavLink>        
                 </div>
             </div>
-            <input 
+            {/* <input 
             className="nav-search"
             type="text"
             placeholder="search (coming soon)"
-            />
+            /> */}
             <div className="nav-item-container">
                 {sessionLinks}
                 <a className="nav-item" href="https://github.com/r-w-chen/sc-clone"  target='_blank'><i className="fab fa-github fa-2x"/></a>

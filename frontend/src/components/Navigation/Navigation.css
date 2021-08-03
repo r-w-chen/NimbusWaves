@@ -2,7 +2,9 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /* remove padding and change back to space-around once you add search bar */
+    justify-content: space-between;
+    padding: 0px 72px;
     background: rgb(56, 56, 56);
     color: rgb(207, 207, 207);
 }
