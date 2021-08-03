@@ -96,7 +96,7 @@ export default function SingleSongPage() {
                         />
                     {/* </label> */}
                 </CommentInputDiv>
-                {comments.map(comment => (
+                {comments?.map(comment => (
                     <SingleComment 
                     key={comment.id}
                     comment={comment} 
