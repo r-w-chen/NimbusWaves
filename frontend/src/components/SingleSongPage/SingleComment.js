@@ -90,7 +90,7 @@ export default function SingleComment({comment, user, sessionUser}) {
                 </div>
                 <p style={{...userStyle, ...timeStamp}}>{comment.createdAt.slice(0,10)}</p>
                 <div style={editStyles}> 
-                    {(showEdit && sessionUser.id === user.id) && (
+                    {(showEdit && sessionUser?.id === user?.id) && (
                     <>
                         <Btn onClick={e => setEditMode(prev => !prev)}><i className="fas fa-edit" /></Btn>
                         <Btn onClick={toggleConfirm}><i className="fas fa-trash-alt"/></Btn>
