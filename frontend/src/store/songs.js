@@ -66,7 +66,7 @@ export const uploadSong = (song) => async dispatch => {
     if(audioImg) formData.append('audioImg', audioImg);
     formData.append('userId', userId);
 
-    const res = await csrfFetch('/api/songs', {
+    const res = await csrfFetch('/api/songs/', {
         method: "POST",
         headers: {
         "Content-Type": "multipart/form-data",
@@ -83,7 +83,7 @@ export const uploadSong = (song) => async dispatch => {
 }
 
 export const fetchSongs = () => async dispatch => {
-    const res = await csrfFetch('/api/songs')
+    const res = await csrfFetch('/api/songs/')
     const { songs } = await res.json();
     const normalizedData = normalize(songs);
     dispatch(loadSongs(normalizedData));

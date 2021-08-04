@@ -30,7 +30,7 @@ const addSongComment = comment => {
 }
 
 export const postComment = comment => async dispatch => {
-    const res = await csrfFetch('/api/comments', {
+    const res = await csrfFetch('/api/comments/', {
         method: 'POST',
         body: JSON.stringify(comment),
     });
@@ -82,7 +82,7 @@ const updateComment = comment => {
     }
 }
 export const patchComment = comment => async dispatch => {
-    const res = await csrfFetch('/api/comments', {
+    const res = await csrfFetch('/api/comments/', {
         method: 'PATCH',
         body: JSON.stringify(comment)
     })

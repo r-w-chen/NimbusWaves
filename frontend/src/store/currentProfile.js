@@ -116,7 +116,7 @@ export const patchProfileSong = song => async dispatch => {
     else formData.append('noAudioImg', true);
 
 
-    const res = await csrfFetch('/api/songs', {
+    const res = await csrfFetch('/api/songs/', {
         method: "PATCH",
         headers: {
         "Content-Type": "multipart/form-data",
