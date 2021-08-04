@@ -96,6 +96,7 @@ export default function SingleSongPage() {
                         />
                     {/* </label> */}
                 </CommentInputDiv>
+                <div className="comments-container">
                 {comments?.map(comment => (
                     <SingleComment 
                     key={comment.id}
@@ -104,6 +105,7 @@ export default function SingleSongPage() {
                     sessionUser={sessionUser}
                     />  
                 ))}
+                </div>
             </section>
             </>
         )

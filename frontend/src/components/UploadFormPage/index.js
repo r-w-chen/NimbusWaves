@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import './UploadFormPage.css';
 import { uploadSong } from '../../store/songs';
 import { patchProfileSong } from '../../store/currentProfile';
@@ -12,14 +12,23 @@ const UploadFormPage = ({type, songId, hideModal}) => {
     // *** possible bonus: tags, captions for a posts section
     const [description, setDescription] = useState('');
     const [audioFile, setAudioFile] = useState(null);
+    const [audioImgPreview, setAudioImgPreview] = useState('');
     const [audioImg, setAudioImg] = useState(null);
-    const [uploadStatus, setUploadStatus] = useState(false);
+    // const [uploadStatus, setUploadStatus] = useState(false);
 
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-
+    const imageDiv = useRef();
+    const history = useHistory();
     // *** add logic that pops up a login modal if sessionUser is null
-    if(uploadStatus) return <Redirect to="/" />
+
+
+    useEffect(() => {
+        if(audioImgPreview){
+            imageDiv.current.style.backgroundImage = `url("${audioImgPreview}")`
+        }
+    }, [audioImg, audioImgPreview])
+
 
     const handleAudioFile = e => {
         const file = e.target.files[0];
@@ -28,7 +37,14 @@ const UploadFormPage = ({type, songId, hideModal}) => {
 
     const handleImageFile = e => {
         const file = e.target.files[0];
-        if(file) setAudioImg(file);
+        const reader = new FileReader();
+        
+        reader.onload = (e) => setAudioImgPreview(e.target.result);
+        
+        if(file){
+            setAudioImg(file);
+            reader.readAsDataURL(file);
+        } 
     }
 
     const handleSubmit = e => {
@@ -46,34 +62,38 @@ const UploadFormPage = ({type, songId, hideModal}) => {
             hideModal();
         } else {
             song.audioFile = audioFile;
-            setUploadStatus(true);
+            // setUploadStatus(true);
             dispatch(uploadSong(song));
-
+            history.push('/discover')
         }
         
     }
 
+
     return (
 
-            <div className="full-upload-container">
+            <form onSubmit={handleSubmit} className="full-upload-container">
                 <div className="upload-header">
                     <h1 style={{fontSize:"20px"}}>Basic Info</h1>
                 </div>
                 <div className="upload-form-container">
-                    <div className="upload-form-image">
+                    <div ref={imageDiv} className="upload-form-image">
+                            {/* {audioImgPreview && <img src={audioImgPreview}/>} */}
                             <div className="file-input-container img-btn">
-                                <button className="upload-btn">
+                                <label for='img-upload' className="upload-img-btn">
                                     <i className="fas fa-camera" />
                                     Upload image
-                                    </button>
+                                    </label>
                                 <input 
+                                    id='img-upload'
                                     className='file-upload'
                                     type="file"
+                                    accept="image/*"
                                     onChange={handleImageFile}
                                 />
                             </div>
                     </div>
-                    <form className="upload-form" onSubmit={handleSubmit}>
+                    <div className="upload-form" >
                         <label>
                             Title
                             <input
@@ -106,20 +126,24 @@ const UploadFormPage = ({type, songId, hideModal}) => {
                         {type === "update"?  null
                         :   
                             <div className="file-input-container song-input">
-                                <button type='button' className="upload-btn">Choose Song</button>
+                                <label for="song-upload" className="upload-song-btn">
+                                    {audioFile ? 'Change Song' : 'Choose Song'}
                                 <input 
+                                    id="song-upload"
                                     className='file-upload'
                                     type="file"
+                                    accept="audio/*"
                                     onChange={handleAudioFile}
                                     size="30"
                                 />
+                                </label>
+                                {audioFile && <p className="audio-file-name">{audioFile.name}</p>}
                             </div>}
-                            
                         
-                        <button className="save-btn">Save</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
+                <button className="save-btn">Save</button>
+            </form>
 
     )
 }

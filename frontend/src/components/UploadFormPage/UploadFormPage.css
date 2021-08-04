@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 550px;
+    /* height: 550px; */
     width: 750px;
     margin: auto;
     background: white;
@@ -18,13 +18,21 @@
     justify-content: center;
     border-radius: 3px;
     width: 750px;
-    height: 500px;
+    border-bottom: 1px solid lightgray;
+    /* height: 500px; */
 }
 .upload-form-image{
     width: 200px;
     max-height: 200px;
+    position: relative;
     background: linear-gradient(to right, pink, teal);
+    background-size: cover;
     margin: 15px;
+}
+.upload-form-image img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .upload-form{
@@ -65,12 +73,16 @@
 
 }
 .file-upload{
-    opacity: 0;
-    z-index: 2;
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 
 .save-btn{
-    margin-top: 15px;
+    margin: 15px;
     height: 40px;
     width: 100px;
     border-radius: 3px;
@@ -79,22 +91,46 @@
     color: white;
     transition: .5s;
 }
-.save-btn:hover{
+.save-btn:hover,
+.upload-song-btn:hover{
     background: #1242a1;
 }
 
-.upload-btn{
-    position: absolute;
+.upload-img-btn{
+    display: block;
+    text-align: center;
+    font-size: 14px;
     border-radius: 3px;
     padding: 5px;
     border: 1px solid gray;
     background: rgb(231, 231, 231);
     width: 200px;
 }
-.upload-btn:hover{
-    background: rgb(235, 235, 235);
+
+.upload-song-btn{
+    display:block;
+    border-radius: 3px;
+    width: 100%;
+    background: #185adb;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    transition: .5s;
+}
+.upload-img-btn:hover{
+    background: rgb(241, 241, 241);
+    cursor: pointer;
+}
+.upload-song-btn:hover{
+    cursor: pointer;
 }
 
 .img-btn{
     top: 200px; 
+}
+
+.audio-file-name{
+    font-size: 12px;
+    text-align: right;
+    margin: 10px 0px 0px 0px;
 }

@@ -30,7 +30,10 @@ const SignupFormPage = ({hideModal, switchToLogin}) => {
             }
             dispatch(signup(user)).catch(async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors){
+                    let filteredErrors = data.errors.filter(err => err !== "Invalid value")
+                    setErrors(filteredErrors);
+                } 
               }); 
             setCurrentModal('');
         }
@@ -42,7 +45,6 @@ const SignupFormPage = ({hideModal, switchToLogin}) => {
         hideModal();
         switchToLogin();
     }
-
 
     return (
         <form className="login-signup" onSubmit={handleSignup}>

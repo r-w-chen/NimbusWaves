@@ -89,7 +89,6 @@ export const patchComment = comment => async dispatch => {
 
     const data = await res.json();
 
-    // console.log('the data I got back', data);
     dispatch(updateComment(data));
     return data;
 }

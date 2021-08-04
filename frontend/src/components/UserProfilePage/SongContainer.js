@@ -36,7 +36,7 @@ export default function SongContainer({song, user, sessionUser}) {
     const onSessionUserPage = !!(sessionUser && sessionUser.id === user.id)
 
     return (
-        <div className="song-container">
+        <div className="single-song-container">
             <div>
                 {song.songImgURL ? <SongImg imgURL={song.songImgURL} style={margins}/> : <DefaultSongImg style={margins}/>}
             </div>

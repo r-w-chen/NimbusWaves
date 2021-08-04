@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Route, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProfile, fetchProfileSongs } from '../../store/currentProfile';
 import ProfileNavigation from './ProfileNavigation';
@@ -8,7 +8,6 @@ import './UserProfilePage.css';
 import UserHeader from './UserHeader';
 export default function UserProfilePage() {
     const { userId } = useParams();
-    // const [onSessionUserPage, setOnSessionUserPage] = useState(false);
     const [profileLoaded, setProfileLoaded] = useState(false);
     const dispatch = useDispatch();
     const currentProfile = useSelector(state => state.currentProfile);
@@ -29,16 +28,12 @@ export default function UserProfilePage() {
 
                     <UserHeader user={currentProfile.user} sessionUser={sessionUser}/>
                     <ProfileNavigation user={currentProfile.user} renderEdit={sessionUser && sessionUser.id === currentProfile.user.id}/>
-                    {currentProfile.songs && Object.values(currentProfile.songs).map(song => (
-                    <SongContainer key={song.id} song={song} user={currentProfile.user} sessionUser={sessionUser}/> 
-                    )
-                    )}
-                    <Route path={`/${userId}/popular-songs`}>
-                        <h1>Popular Songs</h1>
-                    </Route>
-                    <Route path={`/${userId}/songs`}>
-                        <h1>All Songs</h1>
-                    </Route>
+                    <div className="songs-container">
+                        {currentProfile.songs && Object.values(currentProfile.songs).map(song => (
+                        <SongContainer key={song.id} song={song} user={currentProfile.user} sessionUser={sessionUser}/> 
+                        )
+                        )}
+                    </div>
                 </div>
             )
         } else {

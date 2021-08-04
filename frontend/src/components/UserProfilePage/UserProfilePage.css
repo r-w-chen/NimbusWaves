@@ -3,7 +3,7 @@
     margin: auto;
     width: 90%;
     background-color: white;
-    /* height: 100vh; */
+    height: 100%;
     /* overflow-y: scroll;
     -ms-overflow-style: none;  
     scrollbar-width: none;   */
@@ -11,7 +11,11 @@
 .single-page::-webkit-scrollbar{
     /* display: none; */
 }
-.song-container{
+.songs-container{
+    background:inherit;
+    padding-bottom: 15px;
+}
+.single-song-container{
     display: flex;
     margin: 20px;
 }
