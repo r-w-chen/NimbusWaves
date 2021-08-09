@@ -6,13 +6,13 @@ import { uploadSong } from '../../store/songs';
 import { patchProfileSong } from '../../store/currentProfile';
 
 
-const UploadFormPage = ({type, songId, hideModal}) => {
-    const [title, setTitle] = useState('');
-    const [genre, setGenre] = useState('None');
+const UploadFormPage = ({type, song, hideModal}) => {
+    const [title, setTitle] = useState(type === 'update' ? song.title : '');
+    const [genre, setGenre] = useState(type === 'update' ? song.genre : 'None');
     // *** possible bonus: tags, captions for a posts section
-    const [description, setDescription] = useState('');
+    const [description, setDescription] = useState(type === 'update' ? song.description : '');
     const [audioFile, setAudioFile] = useState(null);
-    const [audioImgPreview, setAudioImgPreview] = useState('');
+    const [audioImgPreview, setAudioImgPreview] = useState(type === 'update' ? song.songImgURL : '');
     const [audioImg, setAudioImg] = useState(null);
     // const [uploadStatus, setUploadStatus] = useState(false);
 
@@ -49,7 +49,7 @@ const UploadFormPage = ({type, songId, hideModal}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        let song = {
+        let newSong = {
             title,
             genre,
             description,
@@ -57,16 +57,21 @@ const UploadFormPage = ({type, songId, hideModal}) => {
             userId: sessionUser.id
         }
         if(type === "update"){
-            song.id = songId
-            dispatch(patchProfileSong(song));
+            newSong.id = song.id
+            dispatch(patchProfileSong(newSong));
             hideModal();
         } else {
-            song.audioFile = audioFile;
+            newSong.audioFile = audioFile;
             // setUploadStatus(true);
-            dispatch(uploadSong(song));
+            dispatch(uploadSong(newSong));
             history.push('/discover')
         }
         
+    }
+
+    const exitEdit = e => {
+        e.preventDefault();
+        hideModal();
     }
 
 
@@ -74,7 +79,7 @@ const UploadFormPage = ({type, songId, hideModal}) => {
 
             <form onSubmit={handleSubmit} className="full-upload-container">
                 <div className="upload-header">
-                    <h1 style={{fontSize:"20px"}}>Basic Info</h1>
+                    <h1 style={{fontSize:"20px"}}>{type === 'update'? `Edit Song: ${song.title}`: 'Basic Info'}</h1>
                 </div>
                 <div className="upload-form-container">
                     <div ref={imageDiv} className="upload-form-image">
@@ -123,7 +128,8 @@ const UploadFormPage = ({type, songId, hideModal}) => {
                                 onChange={e => setDescription(e.target.value)}
                             />
                         </label>
-                        {type === "update"?  null
+                        {type === "update" ? 
+                        <p className="audio-file-name">Hit 'Save' to confirm changes</p>
                         :   
                             <div className="file-input-container song-input">
                                 <label for="song-upload" className="upload-song-btn">
@@ -142,7 +148,10 @@ const UploadFormPage = ({type, songId, hideModal}) => {
                         
                     </div>
                 </div>
-                <button className="save-btn">Save</button>
+                <div className='upload-form-footer'>
+                    {type === 'update' && <button onClick={exitEdit}className='save-btn'>Cancel</button>}
+                    <button className="save-btn">{type === 'update' ? 'Save' : 'Upload'}</button>
+                </div>
             </form>
 
     )

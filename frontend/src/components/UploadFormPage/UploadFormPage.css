@@ -17,9 +17,9 @@
     display: flex;
     justify-content: center;
     border-radius: 3px;
-    width: 750px;
+    width: 100%;
     border-bottom: 1px solid lightgray;
-    /* height: 500px; */
+    padding-bottom: 15px;
 }
 .upload-form-image{
     width: 200px;
@@ -94,6 +94,10 @@
 .save-btn:hover,
 .upload-song-btn:hover{
     background: #1242a1;
+}
+
+.upload-form-footer{
+    align-self: flex-end;
 }
 
 .upload-img-btn{
