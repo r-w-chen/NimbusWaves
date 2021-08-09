@@ -77,7 +77,7 @@ router.patch('/', singleMulterUpload('audioImg'), asyncHandler(async (req, res) 
     const songToUpdate = await Song.findByPk(id);
     // console.log("what is req.file?", req.file);
     //may want to see what URL is currently tied to the img so i can delete from s3
-    let songImgURL = null;
+    let songImgURL = songToUpdate.songImgURL;
     if(req.file){
         songImgURL = await singlePublicFileUpload(req.file)
     }

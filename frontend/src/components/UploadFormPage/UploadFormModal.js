@@ -3,7 +3,7 @@ import { Modal } from '../../context/Modal';
 import { Btn } from '../styled-components/index';
 import UploadFormPage from './index';
 
-export default function UploadFormModal({type, songId}) {
+export default function UploadFormModal({type, song}) {
   const [showModal, setShowModal] = useState(false);
 
     return (
@@ -11,7 +11,7 @@ export default function UploadFormModal({type, songId}) {
         <Btn onClick={() => setShowModal(true)}><i className="far fa-edit"></i>Edit</Btn>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
-            <UploadFormPage type={type} songId={songId} hideModal={() => setShowModal(false)}/>
+            <UploadFormPage type={type} song={song} hideModal={() => setShowModal(false)}/>
           </Modal>
         )}
       </>

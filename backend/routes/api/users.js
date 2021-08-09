@@ -59,17 +59,18 @@ const userFields = [
 ]
 router.patch('/', multipleFieldsMulterUpload(userFields), asyncHandler(async (req, res) => {
   const { id, username } = req.body;
-  let profileImgURL = null;
+  const editedUser = await User.findByPk(id);
+
+  let profileImgURL = editedUser.profileImgURL;
   if(req.files.profileImg){
     profileImgURL = await singlePublicFileUpload(req.files.profileImg[0]);
   }
-  let coverImgURL = null;
+  let coverImgURL = editedUser.coverImgURL;
   if(req.files.coverImg){
     // console.log(req.files.coverImg);
     coverImgURL = await singlePublicFileUpload(req.files.coverImg[0]);
   }
 
-  const editedUser = await User.findByPk(id);
   editedUser.update({username, profileImgURL, coverImgURL});
   // console.log(editedUser.toJSON());
   res.json(editedUser);

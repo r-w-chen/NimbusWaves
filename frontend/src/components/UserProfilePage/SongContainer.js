@@ -50,7 +50,7 @@ export default function SongContainer({song, user, sessionUser}) {
                     <div>
                         {onSessionUserPage && (
                         <>    
-                            <UploadFormModal type="update" songId={song.id}></UploadFormModal>
+                            <UploadFormModal type="update" song={song}></UploadFormModal>
                             <DeleteModal song={song}></DeleteModal>
                         </>
                         )}

@@ -9,7 +9,7 @@ const headerStyle = {
     top: '40px',
     padding: '5px'
 }
-export default function UserHeader({user, sessionUser}) {
+export default function UserHeader({user}) {
     if(user.coverImgURL){
         return (
             <UserHeaderImg coverImgURL={user.coverImgURL}>
