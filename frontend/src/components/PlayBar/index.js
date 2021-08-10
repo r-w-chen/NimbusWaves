@@ -25,19 +25,38 @@ export default function PlayBar({hidePlayBar}) {
   const {audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong} = useAudio();
     const [progress, setProgress] = useState(audio.currentTime);
     const [volume, setVolume] = useState(50);
+    const [showVolumeCtrl, setShowVolumeCtrl] = useState(false);
     // const songRef = useRef(currentSong);
+    const volumeRef = useRef();
 
     //duration
     //currentTime 
     const handleVolume = (e) => {
       setVolume(e.target.value);
-      audio.volume = volume / 100; 
+      audio.volume = e.target.value / 100; 
+      if(audio.muted && e.target.value){
+        audio.muted = false;
+      }
+
     }
+
     const handleProgress = (e) => {
       setProgress(e.target.value);
       audio.currentTime = progress / 100 * audio.duration;
     }
 
+    const muteVolume = (e) => {
+      //If audio is not muted, hold ref of what the volume was before it is muted
+      //So if user hits mute button again, we set volume back to that ref value
+      if(!audio.muted){
+        volumeRef.current = volume;
+        setVolume(0);
+      } else {
+        setVolume(volumeRef.current);
+      }
+      audio.muted = !audio.muted;
+    }
+    // console.log("LAST VOLUME LEVEL BEFORE MUTE", volumeRef)
     useEffect(() => {
       let timer;
       if(isPlaying){
@@ -72,17 +91,18 @@ export default function PlayBar({hidePlayBar}) {
                 <input className="progress-bar" type="range" min='0' max='100' value={progress} onChange={handleProgress}/>
               </div>
             </ControlDiv>
-            <ControlDiv>
+            <ControlDiv onMouseEnter={() => setShowVolumeCtrl(true)} onMouseLeave={() => setShowVolumeCtrl(false)}>
               <div className="volume-container">
-              <button>
+              <button onClick={muteVolume}>
                 <i className={volume >= 50 ? "fas fa-volume-up" : volume > 0 && volume < 50? "fas fa-volume-down" : "fas fa-volume-mute"}></i>
               </button>
+              {showVolumeCtrl && 
               <div className="volume-control-wrapper">
                 <input className="volume" type="range" min='0' max='100' value={volume} onChange={handleVolume}/>
                 <div className="volume-control-wrapper-arrow"></div>
               </div>
+              }     
               </div>
-              {/* <i className="fas fa-times" onClick={() => hidePlayBar()}></i> */}
             </ControlDiv>
             <ControlDiv>
               Display Song Info and Cover
