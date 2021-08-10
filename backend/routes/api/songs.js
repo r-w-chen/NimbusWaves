@@ -74,7 +74,9 @@ router.delete('/:id', asyncHandler(async (req, res) => {
 router.patch('/', singleMulterUpload('audioImg'), asyncHandler(async (req, res) => {
     //TODO: query for song by ID and do a song.update()
     const {title, genre, description, id, noAudioImg} = req.body;
-    const songToUpdate = await Song.findByPk(id);
+    const songToUpdate = await Song.findByPk(id, {
+        include: User
+    });
     // console.log("what is req.file?", req.file);
     //may want to see what URL is currently tied to the img so i can delete from s3
     let songImgURL = songToUpdate.songImgURL;

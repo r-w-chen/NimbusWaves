@@ -1,5 +1,6 @@
 import {normalize} from './utils';
 import {csrfFetch} from './csrf';
+import {updateSong} from './songs';
 
 export const currentProfileReducer = (state = { user: null, songs: null}, action) => {
         let newState;
@@ -127,6 +128,7 @@ export const patchProfileSong = song => async dispatch => {
     const data = await res.json();
     // console.log("THE DATA I GOT BACK", data.songToUpdate);
     dispatch(updateProfileSong(data.songToUpdate))
+    dispatch(updateSong(data.songToUpdate))
 }
 
 export const deleteProfileSong = songId => async dispatch => {
