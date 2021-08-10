@@ -97,3 +97,31 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   margin: -5px 0; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
 }
+
+
+.playbar-song-display{
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+}
+
+.playbar-song-info{
+    margin: 10px 10px 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.playbar-song-user{
+    font-size: 12px;
+    color: darkgray;
+}   
+
+.playbar-song-user:hover,
+.playbar-song-title:hover{
+    color: black;
+}
+
+.playbar-song-title{
+    font-size: 12px;
+    color: gray;
+}

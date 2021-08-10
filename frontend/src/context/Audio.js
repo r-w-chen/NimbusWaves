@@ -27,7 +27,7 @@ export function AudioProvider({children}){
         setAudio(audioRef.current);
     }, [])
     return (
-        <AudioContext.Provider value={{audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong}}>
+        <AudioContext.Provider value={{audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong, lastPlayed}}>
             {children}
             <audio ref={audioRef}></audio>
         </AudioContext.Provider>

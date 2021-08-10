@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAudio } from '../../context/Audio';
 import './PlayBar.css';
@@ -22,14 +23,31 @@ const ControlDiv = styled.div`
     flex-grow: 1;
 `;
 
+const SongInfoCover = styled.div`
+    width: 30px;
+    height: 30px;
+    background-image: url(${props => props.imgURL});
+    background-size: cover;
+    margin: 10px;
+`;
+
+const SongInfoCoverDflt = styled.div`
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(to right, pink, teal);
+    margin: 10px;
+`;
+
 export default function PlayBar({hidePlayBar}) {
-    const {audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong} = useAudio();
+    const {audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong, lastPlayed} = useAudio();
     const [progress, setProgress] = useState(audio.currentTime);
     const [volume, setVolume] = useState(50);
     const [showVolumeCtrl, setShowVolumeCtrl] = useState(false);
     const volumeRef = useRef(); // holds reference to previous volume anytime audio is muted
+    // need to change to lastPlayed.current
+    const songs = useSelector(state => state.songs);
+    const currentSongObj = songs[lastPlayed.current];
 
-    
 
     //duration
     //currentTime 
@@ -57,7 +75,11 @@ export default function PlayBar({hidePlayBar}) {
       }
       audio.muted = !audio.muted;
     }
-    // console.log("LAST VOLUME LEVEL BEFORE MUTE", volumeRef)
+
+    const playNextSong = () => {
+
+    }
+
     useEffect(() => {
       let timer;
       if(isPlaying){
@@ -76,36 +98,40 @@ export default function PlayBar({hidePlayBar}) {
         <>
           <PlayBarContainer>
             <div className="audio-controls-wrapper">
-            <ControlDiv>
-              <div className="play-controls">
-                <button>
-                  <i class="fas fa-step-backward"></i>
+              <ControlDiv>
+                <div className="play-controls">
+                  <button>
+                    <i class="fas fa-step-backward"></i>
+                  </button>
+                  <button>
+                    <i className={isPlaying ? "fas fa-pause":"fas fa-play"} onClick={playOrPause}></i>
+                  </button>
+                  <button onClick={playNextSong}>
+                    <i class="fas fa-step-forward"></i>
+                  </button>
+                </div>
+                <div className="progress-bar-wrapper">
+                  <input className="progress-bar" type="range" min='0' max='100' value={progress} onChange={handleProgress}/>
+                </div>
+              </ControlDiv>
+                <div className="volume-container" onMouseEnter={() => setShowVolumeCtrl(true)} onMouseLeave={() => setShowVolumeCtrl(false)}>
+                <button onClick={muteVolume}>
+                  <i className={volume >= 50 ? "fas fa-volume-up" : volume > 0 && volume < 50? "fas fa-volume-down" : "fas fa-volume-mute"}></i>
                 </button>
-                <button>
-                  <i className={isPlaying ? "fas fa-pause":"fas fa-play"} onClick={playOrPause}></i>
-                </button>
-                <button>
-                  <i class="fas fa-step-forward"></i>
-                </button>
+                {showVolumeCtrl && 
+                <div className="volume-control-wrapper">
+                  <input className="volume" type="range" min='0' max='100' value={volume} onChange={handleVolume}/>
+                  <div className="volume-control-wrapper-arrow"></div>
+                </div>
+                }     
+                </div>
+              <div className='playbar-song-display'>
+                {currentSongObj?.songImgURL ? <SongInfoCover imgURL={currentSongObj.songImgURL}/> : <SongInfoCoverDflt />}
+                <div className='playbar-song-info'>
+                  <Link to={`/${currentSongObj?.User.id}`} className="playbar-song-user">{currentSongObj?.User.username}</Link>
+                  <Link to={`/${currentSongObj?.User.id}/${currentSongObj?.id}`} className="playbar-song-title">{currentSongObj?.title}</Link>
+                </div>
               </div>
-              <div className="progress-bar-wrapper">
-                <input className="progress-bar" type="range" min='0' max='100' value={progress} onChange={handleProgress}/>
-              </div>
-            </ControlDiv>
-              <div className="volume-container" onMouseEnter={() => setShowVolumeCtrl(true)} onMouseLeave={() => setShowVolumeCtrl(false)}>
-              <button onClick={muteVolume}>
-                <i className={volume >= 50 ? "fas fa-volume-up" : volume > 0 && volume < 50? "fas fa-volume-down" : "fas fa-volume-mute"}></i>
-              </button>
-              {showVolumeCtrl && 
-              <div className="volume-control-wrapper">
-                <input className="volume" type="range" min='0' max='100' value={volume} onChange={handleVolume}/>
-                <div className="volume-control-wrapper-arrow"></div>
-              </div>
-              }     
-              </div>
-            <ControlDiv>
-
-            </ControlDiv>
             </div>
           </PlayBarContainer>
         </>

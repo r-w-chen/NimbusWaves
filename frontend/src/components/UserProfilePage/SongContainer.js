@@ -10,7 +10,7 @@ const margins = {
 }
 
 export default function SongContainer({song, user, sessionUser}) {
-    const {audio, isPlaying ,setIsPlaying, currentSong, setCurrentSong}  = useAudio();
+    const {audio, setIsPlaying, currentSong, setCurrentSong, lastPlayed}  = useAudio();
     const playStatus = song.id === currentSong ? "fas fa-pause-circle fa-3x play-button" : "fas fa-play-circle fa-3x play-button"
 
     const updatePlayStatus = () => {
@@ -26,6 +26,8 @@ export default function SongContainer({song, user, sessionUser}) {
             audio.play();
             setIsPlaying(true);
             setCurrentSong(song.id)
+            //setting ref so we can preserve the information on music player even when paused
+            lastPlayed.current = song.id;
         } 
     }
 
