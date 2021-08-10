@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useAudio } from '../../context/Audio';
 import './PlayBar.css';
@@ -22,12 +23,13 @@ const ControlDiv = styled.div`
 `;
 
 export default function PlayBar({hidePlayBar}) {
-  const {audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong} = useAudio();
+    const {audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong} = useAudio();
     const [progress, setProgress] = useState(audio.currentTime);
     const [volume, setVolume] = useState(50);
     const [showVolumeCtrl, setShowVolumeCtrl] = useState(false);
-    // const songRef = useRef(currentSong);
-    const volumeRef = useRef();
+    const volumeRef = useRef(); // holds reference to previous volume anytime audio is muted
+
+    
 
     //duration
     //currentTime 
@@ -37,12 +39,11 @@ export default function PlayBar({hidePlayBar}) {
       if(audio.muted && e.target.value){
         audio.muted = false;
       }
-
     }
 
     const handleProgress = (e) => {
       setProgress(e.target.value);
-      audio.currentTime = progress / 100 * audio.duration;
+      audio.currentTime = e.target.value / 100 * audio.duration;
     }
 
     const muteVolume = (e) => {
@@ -91,8 +92,7 @@ export default function PlayBar({hidePlayBar}) {
                 <input className="progress-bar" type="range" min='0' max='100' value={progress} onChange={handleProgress}/>
               </div>
             </ControlDiv>
-            <ControlDiv onMouseEnter={() => setShowVolumeCtrl(true)} onMouseLeave={() => setShowVolumeCtrl(false)}>
-              <div className="volume-container">
+              <div className="volume-container" onMouseEnter={() => setShowVolumeCtrl(true)} onMouseLeave={() => setShowVolumeCtrl(false)}>
               <button onClick={muteVolume}>
                 <i className={volume >= 50 ? "fas fa-volume-up" : volume > 0 && volume < 50? "fas fa-volume-down" : "fas fa-volume-mute"}></i>
               </button>
@@ -103,9 +103,8 @@ export default function PlayBar({hidePlayBar}) {
               </div>
               }     
               </div>
-            </ControlDiv>
             <ControlDiv>
-              Display Song Info and Cover
+
             </ControlDiv>
             </div>
           </PlayBarContainer>

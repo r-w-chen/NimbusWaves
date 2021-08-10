@@ -11,16 +11,15 @@
     flex-grow: 1;
 }
 .progress-bar{
-    height: 2px;
+    height: 5px;
     position: relative;
-    bottom: 5px;
+    bottom: 2px;
     width: 100%;
-    /* padding: 10px 0; */
-    /* margin: 13px 10px 0; */
 }
 
 .volume-container{
     position: relative;
+    display: flex;
 }
 
 .volume-container button {
@@ -33,7 +32,7 @@
     border: 1px solid #cecece;
     padding: 3px;
     transform: rotate(-90deg);
-    top: -20px;
+    top: -10px;
     left: 18px;
     background-color: #f2f2f2;
 
@@ -62,9 +61,9 @@ input[type="range"]{
 .volume {
     /* -webkit-appearance: none; */
     margin: 5px;
-    height: 2px;
+    height: 5px;
     position: relative;
-    bottom: 4px;
+    bottom: 2px;
 }
 
 .volume::-webkit-slider-thumb {
@@ -73,6 +72,10 @@ input[type="range"]{
 /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
 input[type="range"]:focus {
 /* outline: none;  */
+}
+
+input[type="range"]:hover {
+    cursor: pointer;
 }
 
 input[type="range"]::-ms-track {
@@ -87,8 +90,8 @@ color: transparent;
 
 input[type="range"]::-webkit-slider-thumb {
 -webkit-appearance: none;
-  height: 10px;
-  width: 10px;
+  height: 15px;
+  width: 15px;
   border-radius: 50%;
   background: teal;
   cursor: pointer;
