@@ -1,0 +1,96 @@
+.audio-controls-wrapper{
+    display: flex;
+    width: 80%;
+    justify-content: center;
+}
+
+
+/* PROGRESS BAR STYLES */
+
+.progress-bar-wrapper {
+    flex-grow: 1;
+}
+.progress-bar{
+    height: 2px;
+    position: relative;
+    bottom: 5px;
+    width: 100%;
+    /* padding: 10px 0; */
+    /* margin: 13px 10px 0; */
+}
+
+.volume-container{
+    position: relative;
+}
+
+.volume-container button {
+    width: 40px;
+}
+
+.volume-control-wrapper{
+    position: absolute;
+    transform-origin: 0px;
+    border: 1px solid #cecece;
+    padding: 3px;
+    transform: rotate(-90deg);
+    top: -20px;
+    left: 18px;
+    background-color: #f2f2f2;
+
+}
+
+
+.volume-control-wrapper-arrow{
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 10px;
+    left: -5px;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    box-shadow: -1px -1px 1px -1px rgb(0 0 0 / 50%);
+    border: 1px solid #ccc;
+    border-width: 1px 0 0 1px;
+    background-color: #f2f2f2;
+    z-index: 1;
+
+}
+input[type="range"]{
+    -webkit-appearance: none;
+}
+.volume {
+    /* -webkit-appearance: none; */
+    margin: 5px;
+    height: 2px;
+    position: relative;
+    bottom: 4px;
+}
+
+.volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+/* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+input[type="range"]:focus {
+/* outline: none;  */
+}
+
+input[type="range"]::-ms-track {
+width: 100%;
+cursor: pointer;
+
+/* Hides the slider so custom styles can be added */
+background: transparent;
+border-color: transparent;
+color: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: teal;
+  cursor: pointer;
+  margin: -5px 0; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+}
