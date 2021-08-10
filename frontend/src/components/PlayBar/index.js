@@ -48,7 +48,6 @@ export default function PlayBar({hidePlayBar}) {
     const songs = useSelector(state => state.songs);
     const currentSongObj = songs[lastPlayed.current];
 
-
     //duration
     //currentTime 
     const handleVolume = (e) => {
@@ -76,9 +75,39 @@ export default function PlayBar({hidePlayBar}) {
       audio.muted = !audio.muted;
     }
 
-    const playNextSong = () => {
+    const handlePlayback = (command) => {
+      const songList = Object.values(songs);
+      const idxCurrentSong = songList.findIndex(song => +song.id === +lastPlayed.current);
+      const nextSong = songList[idxCurrentSong + 1];
 
+      // change to next song in array if 'next' was hit
+      if(command === 'next' && nextSong){
+        setCurrentSong(nextSong.id)
+        audio.src = nextSong.audioURL;
+        lastPlayed.current = nextSong.id;
+        setIsPlaying(true);
+        audio.play();
+      }
+
+
+      // if 'back' was hit, either restart the song from the beginning
+      // or if the song was already at the beginning, change to previous song
+      if(command === 'back'){
+        const prevSong = songList[idxCurrentSong - 1];
+        if(progress <= 1 && prevSong){
+          audio.src = prevSong.audioURL;
+          setIsPlaying(true);
+          lastPlayed.current = prevSong.id;
+          audio.play();
+        } else {
+          setProgress(0);
+          audio.play();
+          setIsPlaying(true);
+          audio.currentTime = 0;
+        }
+      }
     }
+
 
     useEffect(() => {
       let timer;
@@ -100,13 +129,13 @@ export default function PlayBar({hidePlayBar}) {
             <div className="audio-controls-wrapper">
               <ControlDiv>
                 <div className="play-controls">
-                  <button>
+                  <button onClick={() => handlePlayback('back')}>
                     <i class="fas fa-step-backward"></i>
                   </button>
                   <button>
                     <i className={isPlaying ? "fas fa-pause":"fas fa-play"} onClick={playOrPause}></i>
                   </button>
-                  <button onClick={playNextSong}>
+                  <button onClick={() => handlePlayback('next')}>
                     <i class="fas fa-step-forward"></i>
                   </button>
                 </div>
