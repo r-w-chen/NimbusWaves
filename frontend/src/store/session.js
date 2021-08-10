@@ -10,6 +10,8 @@ export const sessionReducer = (state = initialState, action) => {
             return {...state, user: action.user}
         case END_SESSION:
             return {...state, user: null }
+        case UPDATE_SESSION_USER:
+            return {...state, user: action.user}
         default:
             return state;
     }
@@ -57,6 +59,15 @@ export const endSession = () => {
         type: END_SESSION
     }
 }
+
+
+const UPDATE_SESSION_USER = 'session/updateSessionUser';
+export const updateSessionUser = (user) => {
+    return {
+        type: UPDATE_SESSION_USER,
+        user
+    }
+} 
 
 export const logout = () => async dispatch => {
     const res = await csrfFetch('/api/session', {method: "DELETE"});
