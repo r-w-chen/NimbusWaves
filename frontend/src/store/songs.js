@@ -14,6 +14,10 @@ export const songsReducer = (state = {}, action) => {
             newState = JSON.parse(JSON.stringify(state))
             delete newState[action.id];
             return newState;
+        case UPDATE_SONG:
+            newState = JSON.parse(JSON.stringify(state))
+            newState[action.song.id] = action.song;
+            return newState;
         default:
             return state;
     }
@@ -26,6 +30,14 @@ export const removeSong = (id) => {
     }
 }
 
+const UPDATE_SONG = "songs/updateSong"
+export const updateSong = (song) => {
+    return {
+        type: UPDATE_SONG,
+        song
+    }
+}
+
 const ADD_SONG = "songs/addSong"
 const addSong = (song) => {
     return {
@@ -33,6 +45,7 @@ const addSong = (song) => {
         song
     }
 }
+
 
 // for currentProfile reducer
 // const ADD_PROFILE_SONG = 'currentProfile/addProfileSong';

@@ -7,7 +7,7 @@ export default function HomePage() {
     const sessionUser = useSelector(state => state.session.user);
     const songs = useSelector(state => Object.values(state.songs));
 
-    if(!sessionUser) return <Redirect to='/'/>
+    // if(!sessionUser) return <Redirect to='/'/>
 
     return (
         <div className="homepage">  

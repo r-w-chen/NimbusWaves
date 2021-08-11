@@ -14,11 +14,16 @@ const ProfileButton = ({user}) => {
     const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
-    const handleLogout = () => {
-        dispatch(logout());
-        setShowMenu(false);
+
+
+    
+    const handleLogout = async () => {
+        await dispatch(logout());
         history.push('/')
+        setShowMenu(false);
     }
+
+    // Add event listener to document that lets user click anywhere outside the menu to close it
     useEffect(() => {
         const closeMenu = () => setShowMenu(false);
 

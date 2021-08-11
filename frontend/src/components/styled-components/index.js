@@ -89,7 +89,7 @@ export const SmallUserImg = styled.div`
 export const SmallUserImgDefault = styled.div`
     width: 40px;
     height: 40px;
-    /* border-radius: 50%; */
+
     background: linear-gradient(to right, pink, teal);
     align-self: center;
 `;

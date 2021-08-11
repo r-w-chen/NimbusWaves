@@ -25,7 +25,7 @@ const Navigation = () => {
         <>
           <LoginFormModal isLogin={currentModal === "login"} setCurrentModal={setCurrentModal}/>
           <SignupFormModal isSignup={currentModal === "signup"} setCurrentModal={setCurrentModal}/>
-          {/* <NavLink to="/signup">Sign Up</NavLink> */}
+
         </>
       )
     // *** might want to change ul to nav element
@@ -35,9 +35,9 @@ const Navigation = () => {
                 <div className="nav-item">
                     <NavLink className="nav-link" to="/discover">Home</NavLink>        
                 </div>
-                <div className="nav-item">
+                {/* <div className="nav-item">
                     <NavLink className="nav-link" to="/discover">Stream</NavLink>        
-                </div>
+                </div> */}
             </div>
             {/* <input 
             className="nav-search"

@@ -12,7 +12,7 @@ export default function SingleSongPage() {
     const { songId } = useParams();
     const song = useSelector(state => state.songs[songId]);
     const [content, setComment] = useState('');
-    const {audio, isPlaying ,setIsPlaying, currentSong, setCurrentSong}  = useAudio();
+    const {audio, isPlaying ,setIsPlaying, currentSong, setCurrentSong, lastPlayed}  = useAudio();
     const { setCurrentModal } = useLoginSignup();
     const playStatus = song?.id === currentSong ? "fas fa-pause-circle fa-3x play-button" : "fas fa-play-circle fa-3x play-button"
     const comments = useSelector(state => Object.values(state.comments));
@@ -31,6 +31,7 @@ export default function SingleSongPage() {
             audio.play();
             setIsPlaying(true);
             setCurrentSong(song.id)
+            lastPlayed.current = song.id;
         } 
     }
 
