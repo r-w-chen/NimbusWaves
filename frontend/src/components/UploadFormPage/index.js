@@ -14,6 +14,8 @@ const UploadFormPage = ({type, song, hideModal}) => {
     const [audioFile, setAudioFile] = useState(null);
     const [audioImgPreview, setAudioImgPreview] = useState(type === 'update' ? song.songImgURL : '');
     const [audioImg, setAudioImg] = useState(null);
+    const [errors, setErrors] = useState([]);
+    
     // const [uploadStatus, setUploadStatus] = useState(false);
 
     const dispatch = useDispatch();
@@ -49,6 +51,16 @@ const UploadFormPage = ({type, song, hideModal}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        const errors = [];
+        // Check that title is not empty and audio file was selected
+        if(title.trim().length === 0) errors.push('Title field cannot be empty')
+        if(!audioFile) errors.push('Must include audio file')
+
+        if(errors.length){
+            setErrors(errors);
+            return;
+        }
+
         let newSong = {
             title,
             genre,
@@ -81,6 +93,11 @@ const UploadFormPage = ({type, song, hideModal}) => {
                 <div className="upload-header">
                     <h1 style={{fontSize:"20px"}}>{type === 'update'? `Edit Song: ${song.title}`: 'Basic Info'}</h1>
                 </div>
+                <ul className="error-list">
+                    {errors.length > 0 && errors.map(error => (
+                        <li>* {error}</li>
+                    ))}
+                </ul>
                 <div className="upload-form-container">
                     <div ref={imageDiv} className="upload-form-image">
                             {/* {audioImgPreview && <img src={audioImgPreview}/>} */}
