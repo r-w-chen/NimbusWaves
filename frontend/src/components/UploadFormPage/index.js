@@ -54,13 +54,7 @@ const UploadFormPage = ({type, song, hideModal}) => {
         const errors = [];
         // Check that title is not empty and audio file was selected
         if(title.trim().length === 0) errors.push('Title field cannot be empty')
-        if(!audioFile) errors.push('Must include audio file')
-
-        if(errors.length){
-            setErrors(errors);
-            return;
-        }
-
+       
         let newSong = {
             title,
             genre,
@@ -69,10 +63,24 @@ const UploadFormPage = ({type, song, hideModal}) => {
             userId: sessionUser.id
         }
         if(type === "update"){
+
+            if(errors.length){
+                setErrors(errors);
+                return;
+            }
+
             newSong.id = song.id
             dispatch(patchProfileSong(newSong));
             hideModal();
         } else {
+
+            if(!audioFile) errors.push('Must include audio file')
+
+            if(errors.length){
+                setErrors(errors);
+                return;
+            }
+            
             newSong.audioFile = audioFile;
             // setUploadStatus(true);
             dispatch(uploadSong(newSong));
