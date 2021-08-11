@@ -1,5 +1,6 @@
 .homepage{
-    height: 95%;
+    min-height: 100vh;
+    /* height: 95%; */
     width: 90%;
     background: white;
     margin: auto;

@@ -6,7 +6,8 @@ export function AudioProvider({children}){
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentSong, setCurrentSong] = useState(null); //uses id
     const [audio, setAudio] = useState();
-    const audioRef = useRef();
+    const [showPlayBar, setShowPlayBar] = useState(false); //for later when i want to conditionally render playbar
+     const audioRef = useRef();
     const lastPlayed = useRef(''); 
 
     const playOrPause = () => {
@@ -26,8 +27,11 @@ export function AudioProvider({children}){
     useEffect(() => {
         setAudio(audioRef.current);
     }, [])
+
+
+    
     return (
-        <AudioContext.Provider value={{audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong}}>
+        <AudioContext.Provider value={{audio, isPlaying, setIsPlaying, playOrPause, currentSong, setCurrentSong, lastPlayed, showPlayBar, setShowPlayBar}}>
             {children}
             <audio ref={audioRef}></audio>
         </AudioContext.Provider>

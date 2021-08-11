@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { SongImg, DefaultSongImg, CommentInputBox, CommentInputDiv, SmallUserImg, SmallUserImgDefault } from '../styled-components/index';
 import { postComment, getSongComments } from '../../store/comments';
@@ -12,7 +12,7 @@ export default function SingleSongPage() {
     const { songId } = useParams();
     const song = useSelector(state => state.songs[songId]);
     const [content, setComment] = useState('');
-    const {audio, isPlaying ,setIsPlaying, currentSong, setCurrentSong, lastPlayed}  = useAudio();
+    const {audio, setShowPlayBar ,setIsPlaying, currentSong, setCurrentSong, lastPlayed}  = useAudio();
     const { setCurrentModal } = useLoginSignup();
     const playStatus = song?.id === currentSong ? "fas fa-pause-circle fa-3x play-button" : "fas fa-play-circle fa-3x play-button"
     const comments = useSelector(state => Object.values(state.comments));
@@ -28,6 +28,7 @@ export default function SingleSongPage() {
             if(audio.src !== song.audioURL) {
                 audio.src = song.audioURL;
             }
+            setShowPlayBar(true);
             audio.play();
             setIsPlaying(true);
             setCurrentSong(song.id)
@@ -42,7 +43,6 @@ export default function SingleSongPage() {
         //may want to add a dispatch to search for current song 
         //in case it's not found under songs (once I limit findAll query)
     }, [dispatch]) //removed song.id dependency for now
-
 
     useEffect(() => {
         if(audio.ended) setCurrentSong(null);
@@ -112,9 +112,11 @@ export default function SingleSongPage() {
         )
     } else{
         return (
-            <div className="error-page">
-                <h1 className="error-header">Song Not Found</h1>
-                <Link className="error-link" to="/discover">Return Home</Link>
+            <div className="single-page">    
+                <div className="error-page">
+                    <h1 className="error-header">Song Not Found</h1>
+                    <Link className="error-link" to="/discover">Return Home</Link>
+                </div>
             </div>
         )
     }

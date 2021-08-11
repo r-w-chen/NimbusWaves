@@ -1,13 +1,9 @@
 import { useSelector } from 'react-redux';
 import HomeSongContainer from './HomeSongContainer';
 import "./HomePage.css";
-import { Redirect } from 'react-router';
 
 export default function HomePage() {
-    const sessionUser = useSelector(state => state.session.user);
     const songs = useSelector(state => Object.values(state.songs));
-
-    // if(!sessionUser) return <Redirect to='/'/>
 
     return (
         <div className="homepage">  
