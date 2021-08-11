@@ -38,9 +38,11 @@ export default function UserProfilePage() {
             )
         } else {
             return (
-                <div className="error-page">
-                    <h1 className="error-header">Profile Not Found</h1>
-                    <Link className="error-link" to="/discover">Return Home</Link>
+                <div className="single-page">
+                    <div className="error-page">
+                        <h1 className="error-header">Profile Not Found</h1>
+                        <Link className="error-link" to="/discover">Return Home</Link>
+                    </div>
                 </div>
             )
         }

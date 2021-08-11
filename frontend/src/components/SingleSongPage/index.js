@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { SongImg, DefaultSongImg, CommentInputBox, CommentInputDiv, SmallUserImg, SmallUserImgDefault } from '../styled-components/index';
 import { postComment, getSongComments } from '../../store/comments';
@@ -43,7 +43,6 @@ export default function SingleSongPage() {
         //may want to add a dispatch to search for current song 
         //in case it's not found under songs (once I limit findAll query)
     }, [dispatch]) //removed song.id dependency for now
-
 
     useEffect(() => {
         if(audio.ended) setCurrentSong(null);
@@ -113,9 +112,11 @@ export default function SingleSongPage() {
         )
     } else{
         return (
-            <div className="error-page">
-                <h1 className="error-header">Song Not Found</h1>
-                <Link className="error-link" to="/discover">Return Home</Link>
+            <div className="single-page">    
+                <div className="error-page">
+                    <h1 className="error-header">Song Not Found</h1>
+                    <Link className="error-link" to="/discover">Return Home</Link>
+                </div>
             </div>
         )
     }
