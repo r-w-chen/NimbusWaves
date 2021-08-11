@@ -10,7 +10,7 @@ const margins = {
 }
 
 export default function SongContainer({song, user, sessionUser}) {
-    const {audio, setIsPlaying, currentSong, setCurrentSong, lastPlayed}  = useAudio();
+    const {audio, setIsPlaying, currentSong, setCurrentSong, lastPlayed, setShowPlayBar}  = useAudio();
     const playStatus = song.id === currentSong ? "fas fa-pause-circle fa-3x play-button" : "fas fa-play-circle fa-3x play-button"
 
     const updatePlayStatus = () => {
@@ -23,6 +23,7 @@ export default function SongContainer({song, user, sessionUser}) {
             if(audio.src !== song.audioURL) {
                 audio.src = song.audioURL;
             }
+            setShowPlayBar(true);
             audio.play();
             setIsPlaying(true);
             setCurrentSong(song.id)

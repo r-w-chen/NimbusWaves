@@ -6,7 +6,7 @@ import { useAudio } from '../../context/Audio';
 
 export default function HomeSongContainer({song}) {
     const [hovered, setHovered] = useState(false);
-    const {audio, isPlaying ,setIsPlaying, currentSong, setCurrentSong, lastPlayed}  = useAudio();
+    const {audio, setShowPlayBar ,setIsPlaying, currentSong, setCurrentSong, lastPlayed}  = useAudio();
     const playStatus = song.id === currentSong ? "fas fa-pause-circle fa-3x play-button" : "fas fa-play-circle fa-3x play-button"
 
     useEffect(() => {
@@ -22,6 +22,7 @@ export default function HomeSongContainer({song}) {
             if(audio.src !== song.audioURL) {
                 audio.src = song.audioURL;
             }
+            setShowPlayBar(true);
             audio.play();
             setIsPlaying(true);
             setCurrentSong(song.id)
