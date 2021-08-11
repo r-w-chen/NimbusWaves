@@ -1,0 +1,23 @@
+.footer{
+    background: rgb(56, 56, 56);
+    height: 100px;
+}
+.footer-content{
+    padding: 10px;
+    height: 50%;
+    color: rgb(207, 207, 207);
+    display: flex;
+    justify-content: center;
+}
+
+.footer-content h1{
+    font-size: 24px;
+}
+
+.footer-content a{
+    margin: 0px 15px;
+}
+
+.footer-content a:hover{
+    color: white;
+}

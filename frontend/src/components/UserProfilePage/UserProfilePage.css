@@ -3,10 +3,9 @@
     margin: auto;
     width: 90%;
     background-color: white;
-    height: 100%;
-    /* overflow-y: scroll;
-    -ms-overflow-style: none;  
-    scrollbar-width: none;   */
+    /* height: 100%; */
+    min-height: 100vh;
+
 }
 .single-page::-webkit-scrollbar{
     /* display: none; */

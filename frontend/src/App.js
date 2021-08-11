@@ -10,6 +10,7 @@ import UserProfilePage from './components/UserProfilePage';
 import SingleSongPage from './components/SingleSongPage';
 import Navigation from "./components/Navigation";
 import PlayBar from './components/PlayBar';
+import Footer from './components/Footer';
 import { useAudio } from "./context/Audio";
 function App() {
   // const {isPlaying} = useAudio();
@@ -24,6 +25,8 @@ function App() {
 
   return isLoaded && (
     <>
+    <div className="page-container">
+    {/* <div className="content-wrap"> */}
       <Navigation />
       <Switch>
         <Route exact path="/">
@@ -43,6 +46,10 @@ function App() {
         </Route>
       </Switch>
       {showPlayBar && <PlayBar hidePlayBar={() => setShowPlayBar(false)}/>}
+    {/* </div> */}
+    <Footer />
+    </div>
+
     </>
   );
 }
