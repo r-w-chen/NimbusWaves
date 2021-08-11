@@ -9,6 +9,7 @@ export default function EditUserModal({user}) {
     const [username, setUsername] = useState(user.username)
     const [profileImg, setProfileImg] = useState(null);
     const [coverImg, setCoverImg] = useState(null);
+    const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
 
     // *** have coverImg and profileImg uploaded separately instead
@@ -27,6 +28,14 @@ export default function EditUserModal({user}) {
 
     const handleUserEdit = (e) => {
         e.preventDefault();
+        const errors = [];
+
+        if(username.trim().length === 0) errors.push('Username cannot be empty')
+        if(errors.length > 0){
+          setErrors([errors]);
+          return;
+        }
+
         const editedUser = {
             id: user.id,
             username,
@@ -34,6 +43,7 @@ export default function EditUserModal({user}) {
             coverImg
         }
         dispatch(patchUserProfile(editedUser));
+        setErrors([]);
         setShowModal(false);
     }
 
@@ -46,6 +56,11 @@ export default function EditUserModal({user}) {
                   <div className="edit-header">
                       <h1 >Edit Profile</h1>
                   </div>
+                  <ul className="error-user-list">
+                    {errors.length > 0 && errors.map(error => (
+                        <li>* {error}</li>
+                    ))}
+                  </ul>
                   <label className="edit-label" >
                   Display name
                   <LoginInput

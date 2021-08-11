@@ -99,6 +99,11 @@
     background: rgb(201, 200, 200);
 }
 
+/* For Edit Form validations */
+.error-user-list li{
+    font-size: 12px;
+    color: red;
+}
 
 .error-page{
     display: flex;
@@ -120,3 +125,5 @@
 .error-link:hover{
     color: #dddcdc;
 }
+
+
