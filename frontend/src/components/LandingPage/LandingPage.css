@@ -8,11 +8,15 @@
     justify-content: center;
     align-items: center;
 }
+.landing-header{
+    background: rgba(0,0,0,.5);
+    box-shadow: 0 0 10px 10px rgba(0,0,0,.5);
+
+}
 .landing-header h1{
     color: whitesmoke;
     font-family: 'Pattaya', sans-serif;
     font-size: 5em;
-    background: rgba(0,0,0,.5)
 }
 .landing-header p{
     font-size: 20px;
